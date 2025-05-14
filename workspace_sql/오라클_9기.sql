@@ -153,3 +153,188 @@ where deptno in ( 10, 20 );
 select * from emp
 where deptno not in ( 10, 20 );
 
+--1. 부서번호 10번인 사람들을 출력
+select * from emp
+where deptno = 10;
+
+--2. 부서번호 10번이 아닌 사람들을 출력
+select * from emp
+--where not (deptno = 10);
+--where deptno != 10;
+where deptno <> 10;
+
+--3. 급여가 3000 이상인 사람들을 출력
+select * from emp
+where sal >= 3000;
+
+--4. 급여가 1500~3000 사이(포함)의 사람을 출력
+select * from emp
+where sal >= 1500 and sal <= 3000;
+
+--5. 부서번호 10번인 사람 중 급여 2000 이상인 사람을 출력
+select * from emp
+where deptno = 10 and sal >= 2000;
+
+--6. 부서번호 30번 중 1500~3000 사이(미포함)인 사람을 출력
+select * from emp
+where 
+    deptno = 30 
+    and ( sal > 1500 and sal < 3000 );
+
+--7. 부서번호 30번 중 1500~3000 사이(미포함)인 사람을 연봉이 작은 순으로 출력, 연봉이 같은 경우 이름이 빠른 순으로 출력
+select * from emp
+where 
+    deptno = 30 
+    and ( sal > 1500 and sal < 3000 )
+--order by sal asc, ename asc
+order by sal, ename;
+
+--8. 부서번호 20,30번 중 1500~3000 사이(미포함)인 사람을 연봉이 작은 순으로 출력, 연봉이 같은 경우 이름이 빠른 순으로 출력
+select * from emp
+--where deptno = 20 or deptno = 30
+-- 같은 컬럼이 = 과 or로 연결되어 있는 경우 IN 으로 변경할 수 있다
+where 
+    deptno in (20, 30)
+    and ( sal > 1500 and sal < 3000 )
+order by sal, ename;
+
+select * from emp
+where (deptno = 20 or deptno = 30) and ( sal > 1500 and sal < 3000 )
+order by sal, ename;
+
+--9. 부서번호가 20 또는 30이고 급여가 1500 이상인 직원의 이름과 급여를 급여 오름차순으로 출력하라.
+select ename, sal from emp
+where deptno in (20, 30)
+and sal >= 1500
+order by sal;
+
+-- between
+select * from emp
+where sal between 2000 and 3000;
+
+select * from emp
+where sal between 2000 and 3000
+and deptno = 20;
+
+select * from emp
+where sal not between 2000 and 3000 and deptno not in (10, 20);
+
+-- 2000 초과, 3000 미만
+select * from emp
+where sal between 2000 and 3000
+and sal != 2000
+and sal != 3000;
+
+-- like
+select * from emp
+where ename like 'S%';
+
+-- 첫번째 상관없음
+-- 두번째 무조건 L
+-- 그 이후 상관없음
+select * from emp
+where ename like '_L%';
+
+select * from emp
+where ename like '%AM%';
+
+select * from emp
+where ename like '%A%';
+
+select * from emp
+where ename not like '%A%';
+
+select * from emp
+where not ename like '%A%';
+
+select * from emp
+where ename like '%A%S%' or ename like '%S%A%';
+
+select * from emp
+where ename like '%A%' or  ename like '%a%';
+
+select comm from emp;
+
+-- null
+select * from emp
+where comm > 400;
+
+-- 안된다
+select * from emp
+where comm = '(null)';
+select * from emp
+where comm = null;
+
+select * from emp
+where comm is null;
+
+select * from emp
+where mgr is null;
+
+select * from emp
+where comm is not null;
+
+select * from emp where deptno = 10;
+select * from emp where deptno = 20;
+
+select * from emp where deptno = 10
+union
+select * from emp where deptno = 20;
+
+
+select * from emp where deptno = 10
+union
+select * from emp where deptno = 10;
+
+select * from emp where deptno = 10
+union all
+select * from emp where deptno = 10;
+
+
+select empno from emp
+union all
+select sal from emp;
+
+select empno from emp
+union all
+select ename from emp;
+
+-- Q5
+-- 이름, 번호, 급여, 부서를 출력하기
+-- 이름에 E 포함, 부서는 30, 급여 1000~2000가 아닌!
+select ename, empno, sal, deptno
+from emp
+where
+    ename like '%E%'
+    and deptno = 30
+    and not (sal >= 1000 and sal <= 2000);
+
+-- Q6
+-- 추가수당 null, mgr null이 아니고, 직책은 m,c, 이름에 두번째 글씨가 L이 아닌!!
+select * from emp
+where
+    comm is null
+    and mgr is not null
+    and job in ('MANAGER', 'CLERK')
+    and ename not like '_L%';
+
+-- upper, lower
+select ename, upper(ename), lower(ename) from emp;
+
+select ename from emp
+where lower(ename) like lower('%aM%');
+
+
+select upper('aBc'), lower('aBc'), upper( lower('aBc') ) from dual;
+
+select ename, length(ename) from emp;
+
+select * from emp
+where length(ename) = 5;
+
+
+select lengthb('a'), lengthb('가낡') from dual;
+
+desc emp;
+
+
