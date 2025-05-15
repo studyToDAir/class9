@@ -299,6 +299,23 @@ select empno from emp
 union all
 select ename from emp;
 
+
+-- 부서 10번을 사원번호 내림차순desc으로 정렬하여 출력
+select * from emp where deptno = 10
+order by empno desc;
+-- 부서 20번을 사원번호 오름차순으로 정렬하여 출력
+select * from emp where deptno = 20
+order by empno asc;
+
+-- 아직 안배운 기술로 order by 적용 가능
+select * from (
+    select * from emp where deptno = 10
+    union all
+    select * from emp where deptno = 20
+)
+order by empno asc;
+
+
 -- Q5
 -- 이름, 번호, 급여, 부서를 출력하기
 -- 이름에 E 포함, 부서는 30, 급여 1000~2000가 아닌!
@@ -336,5 +353,96 @@ where length(ename) = 5;
 select lengthb('a'), lengthb('가낡') from dual;
 
 desc emp;
+
+-- substr
+select job, substr(job, 1, 2), substr(job, 3, 2), substr(job, 5) from emp; 
+-- 사원 이름을 두번째 부터 3글자만 출력
+select substr(ename, 2, 3) from emp;
+select substr(ename, 2, 300) from emp;
+select substr(ename, 20, 300) from emp; -- 실제 글씨 길이 보다 넘어가면 null
+
+select job, substr(job, -3, 2) from emp;
+select job, substr(job, -30, 2) from emp;
+-- 이름의 마지막 3글자만 출력하기
+select ename, substr(ename, -3, 10) from emp;
+select ename, substr(ename, -3) from emp;
+
+select 'a-b-c',
+    replace('a-b-c', '-', '😍'),
+    replace('a-b-c', '-'),
+    replace('a-b-c', '-', '')
+from emp;
+-- ename의 A를 '-' 모두 교체
+select ename, replace(ename, 'A', '-') from emp;
+select ename, replace(ename, 'TT', '-3131351531') from emp;
+
+-- lpad
+-- 모자르면 채우고
+-- 넘어가면 자르고
+select lpad(ename, 5, '+') from emp;
+-- replace 사용하지 말고 풀기
+-- 문제1
+-- ename에 앞에 두글자만 출력
+select ename, substr(ename, 1, 2), rpad(ename, 2) from emp;
+
+-- 문제2
+-- 앞에 두글자만 원본을 출력하고 나머지는 4개의 *로 표시
+select
+    rpad(
+        substr(ename, 1, 2),
+        6,
+        '+-+-+-+-+-'
+    )
+from emp;
+
+-- 문제3
+-- 사원 이름 두글자만 보이고 나머지는 *로. 단, 원래 이름 길이 만큼 표시
+-- 예 : WA**, SM***
+select
+    ename, 
+    rpad(
+        substr(ename, 1, 2),
+        length(ename),
+        '*'
+    )
+from emp;
+
+-- 심화?
+-- job을 총 20자 중 가운데 정렬
+
+select 'ab'||'cd' || 'ef' from dual;
+select empno || ' : ' || ename from emp; 
+
+-- trim
+select '  ab c   ', trim('  ab c   ') from dual; 
+
+-- round
+select
+    round(14.46), -- 하나만 입력하면 소수점 첫째자리 반올림
+    round(14.46, 1), -- 소수점 두번째 자리부터 1
+    round(14.46, -1) -- 음수일 때 정수로 거슬러 올라간다
+from dual;
+
+select
+    trunc(14.46),
+    trunc(14.46, 1),
+    trunc(14.46, -1),
+    trunc(-14.46)
+from dual;
+
+select
+    ceil(3.14),
+    floor(3.14),
+    ceil(-3.14),
+    floor(-3.14),
+    trunc(-3.14)
+from dual;
+;
+select 7 / 3 from dual;;;;;;;; 
+select 7 / 0 from dual;
+
+select mod(7, 3) from dual;
+select mod(8, 3) from dual;
+select mod(9, 3) from dual;
 
 
