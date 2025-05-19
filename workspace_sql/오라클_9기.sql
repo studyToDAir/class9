@@ -445,4 +445,291 @@ select mod(7, 3) from dual;
 select mod(8, 3) from dual;
 select mod(9, 3) from dual;
 
+-- 각 사원의 연봉을 출력
+-- 월급 * 12 + comm
+-- ename, total_pay 출력
+
+select job, sal,
+        decode(job,
+            'MANAGER', sal*1.1,
+            'SALEMAN', sal*1.05,
+            'ANALYST', sal,
+            sal*1.03) as upsal
+from emp;
+
+select job, sal,
+    case job
+        when 'MANAGER' then sal*1.1
+        when 'SALEMAN' then sal*1.05
+        when 'ANALYST' then sal
+        else sal * 1.03
+    end as upsal
+from emp;
+
+-- nvl 사용하지 않고
+-- decode, case로 nvl이랑 동일한 결과 출력하기
+select comm,
+    nvl(comm, -1), 
+    decode(comm,
+        null, -1,
+        comm) as decode,
+    case comm
+        when null then -1
+        else comm
+    end as case
+from emp;
+
+-- where comm = null
+select comm,
+    case
+        when comm is null then '해당 없음'
+        when comm = 0 then '0원'
+        when comm > 0 then '수당 : ' || comm
+    end as case
+from emp;
+
+select comm,
+    case
+        when comm is null then '해당 없음'
+        when comm is null then 'X'
+        when comm = 0 then '0원'
+        when comm > 0 then '수당 : ' || comm
+    end as case
+from emp;
+
+-- Q1
+select
+    empno, substr(empno, 1,2) || '**' as masking_empno,
+    ename, rpad( substr(ename, 1,1), length(ename), '*') as masking_ename
+from emp
+where
+    length(ename) >= 5
+    and length(ename) < 6;
+
+-- Q2
+select
+    empno, ename, sal,
+    trunc(sal / 21.5, 2) day_pay,
+    round((sal / 21.5) / 8, 1) as time_pay
+from emp;
+
+-- Q4
+select empno, ename, mgr,
+    case
+        when mgr is null then '0000'
+        when substr(mgr, 1, 2) = 75 then '5555'
+        when substr(mgr, 1, 2) = 76 then '6666'
+        when substr(mgr, 1, 2) = 77 then '7777'
+        when substr(mgr, 1, 2) = 78 then '8888'
+        else to_char(mgr) -- '' || mgr
+    end
+from emp;
+
+select empno, ename, mgr,
+    case
+        when mgr is null 
+        then '0000'
+        
+        when mgr is not null 
+        then
+            case substr(mgr, 1, 2)
+                when '75' then '5555'
+                when '76' then '6666'
+                when '77' then '7777'
+                when '78' then '8888'
+                else to_char(mgr)
+            end
+    end
+from emp;
+
+
+select empno, ename, mgr,
+    case substr(mgr, 1, 2)
+        when '75' then '5555'
+        when '76' then '6666'
+        when '77' then '7777'
+        when '78' then '8888'
+        else to_char(  nvl(mgr, '0000')  )
+    end
+from emp;
+
+
+select 
+    case
+        when mgr is null 
+            then '0000'
+        when substr(mgr, 2, 1) in ('5', '6', '7', '8') 
+            then lpad( substr(mgr, 2, 1), 4, substr(mgr, 2, 1) )
+        else '' || mgr
+    end
+from emp;
+
+-- sum
+select
+    sum(sal)
+from emp;
+
+select sal from emp;
+
+select
+    sum(sal)
+from emp
+where deptno = 10;
+
+select
+    sal, sum(sal)
+from emp;
+
+select sum(comm) from emp;
+
+select count(*), sum(sal) from emp;
+
+select count(sal), count(comm) from emp;
+
+select max(sal), min(sal), min(hiredate), min(comm) from emp;
+-- 이름에 a가 들어가는 사람은 몇명?
+
+select count(*) from emp
+where ename like '%A%';
+
+select avg(sal) from emp;
+
+-- 다중행 함수(집계 함수)는 where에서 사용할 수 없다
+--select  *
+--from emp
+--where sal > avg(sal);
+
+select deptno
+from emp
+group by deptno;
+
+select deptno, sum(sal), count(*)
+from emp
+group by deptno;
+
+select job from emp
+group by job;
+
+select deptno, job, count(*)
+from emp
+group by deptno, job;
+
+select deptno, job, count(*), ename
+from emp
+group by deptno, job, ename;
+
+
+select job 
+from emp
+where deptno = 10
+group by job
+order by job desc;
+
+select job, deptno
+from emp
+group by deptno, job
+having deptno = 10;
+
+select job, deptno, avg(sal)
+from emp
+group by deptno, job;
+
+select job, deptno, avg(sal)
+from emp
+group by deptno, job
+having avg(sal) > 2000;
+
+select job, count(*) as cnt
+from emp
+where sal > 1000-- and cnt >= 3 -- and count(*) >= 3
+group by job
+having count(*) >= 3
+order by cnt desc;
+
+------------------------------------
+select * from dept;
+
+select *
+from emp, dept
+order by empno;
+
+select *
+from emp, dept
+where emp.deptno = dept.deptno
+order by empno;
+
+select *
+from emp e, dept d
+where e.deptno = d.deptno
+order by empno;
+
+
+--select ename, deptno
+--from emp e, dept d
+--where e.deptno = d.deptno;
+
+select ename, e.deptno
+from emp e, dept d
+where e.deptno = d.deptno;
+
+select ename, e.deptno
+from scott4_0.emp e, dept d
+where e.deptno = d.deptno;
+
+select * from salgrade;
+select grade, salgrade.* from salgrade;
+
+select s.grade, e.*, s.*
+from emp e, salgrade s
+where e.sal >= s.losal and e.sal <= s.hisal
+;
+
+select * from emp;
+
+select e1.empno, e1.ename, e1.mgr, e2.empno, e2.ename
+from emp e1, emp e2
+where e1.mgr = e2.empno;
+-- 총 13개 나옴
+select count(*)
+from emp e1, emp e2
+where e1.mgr = e2.empno;
+
+select e1.empno, e1.ename, e1.mgr, e2.empno, e2.ename
+from emp e1, emp e2
+where e1.mgr = e2.empno(+);
+--where e2.empno(+) = e1.mgr;
+
+select e1.empno, e1.ename, e1.mgr, e2.empno, e2.ename
+from emp e1, emp e2
+where e1.mgr(+) = e2.empno;
+
+select empno, ename, deptno /*, d.deptno */
+from emp e join dept d using(deptno)
+where sal >= 3000;
+
+select empno, ename, e.deptno /*, deptno */
+from emp e join dept d on(e.deptno = d.deptno)
+where sal >= 3000;
+
+select *
+from 
+    emp e1 join emp e2 on(e1.mgr = e2.empno);
+
+select *
+from 
+    emp e1 left outer join emp e2 on(e1.mgr = e2.empno);
+--    e1.mgr = e2.empno(+);
+
+select empno, ename, e.deptno /*, deptno */
+from emp e left outer join dept d on(e.deptno = d.deptno);
+
+select *
+from 
+    emp e1 right outer join emp e2 on(e1.mgr = e2.empno);
+
+select *
+from 
+    emp e1 full outer join emp e2 on(e1.mgr = e2.empno);
+
+
 
