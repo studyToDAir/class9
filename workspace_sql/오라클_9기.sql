@@ -756,6 +756,7 @@ from emp;
 
 -- 226p.
 -- Q1
+-- 정렬이 이상하므로 결과와 정렬 상태가 맞지 않아도 됨
 select e.deptno as deptno, d.dname, e.empno, e.ename, e.sal
 from emp e, dept d
 where e.deptno = d.deptno
@@ -867,3 +868,253 @@ select sal, (select grade
                 from dept
                 where e.deptno = dept.deptno) as dname
 from emp e;
+
+
+--1. 커미션이 null인 사원을 급여 오름차순으로 정렬
+select * from emp
+where comm is null
+order by sal asc;
+
+--2. 급여 등급 별 사원 수를 등급 오름차순으로 정렬
+--단, 모든 등급을 표시한다
+select s.grade, count(*)
+from emp e, salgrade s
+where e.sal between s.losal and s.hisal
+group by s.grade
+order by s.grade;
+
+--3. 이름, 급여, 급여 등급, 부서이름 조회
+--단, 급여 등급 3 이상만 조회. 급여 등급 내림차순, 급여 등급이 같은 경우 급여 내림 차순
+select e.ename, e.sal, s.grade, d.dname
+from emp e, salgrade s, dept d
+where 
+    e.sal between s.losal and s.hisal
+    and e.deptno = d.deptno
+    and s.grade >= 3
+order by s.grade desc, e.sal desc;
+
+--4. 부서명이 SALES인 사원 중 급여 등급이 2 또는 3인 사원을 급여 내림차순으로 정렬
+select *
+from emp e
+    left outer join dept d using (deptno) -- 괄호 필수
+    left outer join salgrade s on (e.sal >= s.losal and e.sal <= s.hisal)
+-- where s.grade = 2 or s.grade = 3
+where s.grade in (2, 3)
+      and d.dname = 'SALES'
+order by e.sal desc;
+-- 249p.
+-- Q1
+select job, empno, ename, sal, d.deptno, dname 
+from emp e, dept d
+where e.deptno = d.deptno
+      and job = (   select job from emp
+                      where ename = 'ALLEN' )
+order by sal desc;
+
+-- Q2
+-- 1. 전체 사원 평균 급여 확보
+-- 2. 평균보다 초과하는 사람들 출력
+-- 3. 정렬은 급여 내림차순, 사원번호 오름차순
+select 
+    empno, 
+    ename, 
+    (select dname from dept d where e.deptno = d.deptno) dname,
+    hiredate, 
+    (select loc from dept d where e.deptno = d.deptno) loc,
+    sal,
+    (select grade from salgrade s where e.sal >= s.losal and e.sal <= s.hisal) grade
+from emp e
+where sal > (select avg(sal) from emp)
+order by sal desc, empno desc;
+
+-- Q3
+select job, 10 from emp where deptno = 10
+union all
+select distinct job, 30 from emp where deptno = 30;
+
+select empno, ename, job, deptno, dname, loc
+from emp
+left outer join dept d using (deptno)
+where 
+    deptno = 10
+    and job not in (select job 
+                    from emp 
+                    where deptno = 30 );
+
+-- Q4
+select empno, ename, sal, grade
+from emp e
+left outer join salgrade s on (e.sal >= s.losal and e.sal <= s.hisal)
+where
+    sal > (select max(sal) from emp where job = 'SALESMAN');
+--    sal > all (select sal from emp where job = 'SALESMAN');
+
+------------------------------------
+-- 12장
+desc emp;
+
+create table emp_ddl (
+    empno number(4),
+    ename varchar2(10),
+    job varchar2(9),
+    mgr number(4),
+    hiredate date,
+    sal number(7,2),
+    comm number(7,2),
+    deptno number(2)
+);
+desc emp_ddl;
+select * from emp_ddl;
+
+create table dept_ddl
+as select * from dept;
+
+desc dept_ddl;
+select * from dept_ddl;
+
+create table emp_ddl_30
+as select * from emp where deptno = 30;
+
+select * from emp_ddl_30;
+
+create table empdept_ddl
+as  select empno, ename, job, mgr, hiredate, sal, comm, d.deptno, dname, loc
+    from emp e, dept d
+    where 1 <> 1;
+
+select * from empdept_ddl;
+
+--------------------
+-- alter
+create table emp_alter
+as select * from emp;
+select * from emp_alter;
+
+alter table emp_alter
+add hp varchar(20); -- varchar로 적으면 자동으로 varchar2로 인식한다
+
+desc emp_alter;
+select * from emp_alter;
+
+alter table emp_alter
+add age number(3) default 1; -- create table에서도 사용 가능하다
+
+alter table emp_alter
+rename column hp to tel2;
+
+alter table emp_alter
+modify empno number(5);
+desc emp_alter;
+
+-- 수정할 때 타입의 크기가 커지는 건 가능하지만
+-- 줄어드는 건 불가능
+alter table emp_alter
+modify empno number(4);
+select * from emp_alter;
+
+alter table emp_alter
+drop column tel;
+select * from emp_alter;
+
+alter table emp_alter
+drop column age;
+
+rename emp_alter to emp_rename;
+
+select * from emp_rename;
+
+truncate table emp_rename;
+
+drop table emp_rename;
+----------------------------------------
+-- 10장
+create table dept_temp
+as select * from dept;
+select * from dept_temp;
+
+insert into dept_temp (deptno, dname, loc)
+values (50, 'DATABASE', 'SEOUL');
+select * from dept_temp;
+
+insert into dept_temp
+values (60, 'NETWORK', 'BUSAN');
+select * from dept_temp;
+
+insert into dept_temp (deptno, dname, loc)
+values  (70, 'WEB', null);
+insert into dept_temp (deptno, dname, loc)
+values  (80, 'MOBILE', '');
+select * from dept_temp;
+
+insert into dept_temp (deptno, loc)
+values (90, 'INCHEON');
+select * from dept_temp;
+
+create table emp_temp
+as select * from emp where 1 <> 1;
+select * from emp_temp;
+
+insert into emp_temp (empno, ename, hiredate)
+values ( 2111, '이순신', to_date('2025-05-21', 'yyyy-mm-dd') );
+
+insert into emp_temp (empno, ename, hiredate)
+values ( 3111, '심청이', sysdate );
+
+insert into emp_temp
+select * from emp where deptno = 10;
+
+insert all
+into emp_temp (empno, ename, hiredate) values ( 3112, '심청이', sysdate )
+into emp_temp (empno, ename, hiredate) values ( 3113, '심청이', sysdate )
+select * from dual;
+
+select * from emp_temp;
+----------------------------
+-- update
+create table dept_temp2
+as select * from dept;
+select * from dept_temp2;
+
+update dept_temp2
+set loc = 'SEOUL';
+
+select * from dept_temp2;
+-- update, delete의 
+-- where를 무조건 select에서 검증하고 사용하기
+update dept_temp2
+set dname = 'DATABASE',
+    loc = 'SEOUL2'
+where deptno = 40;
+
+select * from dept_temp2
+where deptno = 40;
+
+create table emp_tmp
+as select * from emp;
+select * from emp_tmp;
+
+select sal, sal * 1.03 from emp_tmp
+where sal < 1000;
+
+update emp_tmp
+set sal = sal * 1.03
+where sal < 1000;
+
+select * from emp_tmp
+where sal < 1000;
+
+create table emp_temp2
+as select * from emp;
+select * from emp_temp2;
+
+commit;
+
+delete emp_temp2;
+select * from emp_temp2;
+
+rollback;
+
+delete emp_temp2
+where deptno = 10;
+
+select * from emp_temp2;
