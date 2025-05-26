@@ -1240,7 +1240,8 @@ update dept_fk
 set deptno = 20
 where deptno = 10;
 
-
+desc emp;
+desc dept;
 
 
 
