@@ -53,13 +53,13 @@ public class VarExam {
 		System.out.println("z : "+ z);
 		
 		
-		int x1 = 20;
-		int x2 = 30;
+		int x1 = 26845;
+		int x2 = 684684;
 		/*
 		 * 
 		 */
-		System.out.println("x1 : "+ x1); // 30
-		System.out.println("x2 : "+ x2); // 20
+		System.out.println("x1 : "+ x1); // 684684
+		System.out.println("x2 : "+ x2); // 26845
 	}
 
 }
