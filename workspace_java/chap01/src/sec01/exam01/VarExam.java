@@ -30,6 +30,7 @@ public class VarExam {
 		 * 한줄 복사   : Ctrl + Alt + 위아래 방향키
 		 * 주석 단축키 : Ctrl + /
 		 * 한줄 이동   : Alt + 위아래 방향키
+		 * 자동 정렬   : Ctrl + shift + f
 		 */
 		
 		// 변수 a를 선언과 동시에 10으로 초기화
