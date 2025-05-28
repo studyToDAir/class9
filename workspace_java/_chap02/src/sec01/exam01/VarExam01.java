@@ -1,6 +1,6 @@
 package sec01.exam01;
 
-public class VarExam {
+public class VarExam01 {
 
 	public static void main(String[] args) {
 
@@ -30,7 +30,7 @@ public class VarExam {
 		 * 한줄 복사   : Ctrl + Alt + 위아래 방향키
 		 * 주석 단축키 : Ctrl + /
 		 * 한줄 이동   : Alt + 위아래 방향키
-		 * 자동 정렬   : Ctrl + shift + f
+		 * 자동 정렬   : Ctrl + Shift + f
 		 */
 		
 		// 변수 a를 선언과 동시에 10으로 초기화
@@ -56,11 +56,20 @@ public class VarExam {
 		
 		int x1 = 26845;
 		int x2 = 684684;
-		/*
-		 * 
-		 */
+		
+		int x3 = x1;
+		x1 = x2;
+		x2 = x3;
+		
 		System.out.println("x1 : "+ x1); // 684684
 		System.out.println("x2 : "+ x2); // 26845
+		
+		// user + info
+		// 
+		// userInfo  : 카멜케이스 camel case
+		// user_info : snake case
+		// user-info : 캐밥 kebab case
+		// nUserInfo, sUserInfo : 헝가리언 표기법
 	}
 
 }
