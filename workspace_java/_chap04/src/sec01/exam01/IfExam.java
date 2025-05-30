@@ -196,6 +196,10 @@ public class IfExam {
 
 		int studyBoss = ((int) (Math.random()*10) ) + 1;
 		System.out.println("스터디 보스 : "+ studyBoss);
+		
+		i = i + 2;
+		i += 1;
+		i++;
 	}
 
 }
