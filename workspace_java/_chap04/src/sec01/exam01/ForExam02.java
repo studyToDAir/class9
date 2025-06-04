@@ -1,6 +1,6 @@
 package sec01.exam01;
 
-public class ForExam {
+public class ForExam02 {
 
 	public static void main(String[] args) {
 
@@ -334,131 +334,178 @@ public class ForExam {
 			
 		}
 		
-		////////////////////////////////////
-		/*
-		....+....
-		...+++...
-		..+++++..
-		.+++++++.
-		+++++++++
-		*/
+		// 별찍기 피라미드찍기는 PyramidExam에 있음
 		
-		// 0단계
-		/*
-			+
-			+
-			+
-			+
-			+
-		*/
-		System.out.println("+");
-		System.out.println("+");
-		System.out.println("+");
-		System.out.println("+");
-		System.out.println("+");
-		
-		for(int j=1; j<=5; j++) {
-			System.out.println("+");
+		// 문제 1
+		// 주사위 2개를 굴려서 나올 수 있는 모든 조합을 출력한다
+		// [1,1] [1,2]
+//		for(int j=1; j<=6; j++) {
+//			System.out.print("[1, "+ j +"] ");
+//		}
+//		System.out.println();
+//		for(int j=1; j<=6; j++) {
+//			System.out.print("[2, "+ j +"] ");
+//		}
+//		System.out.println();
+		for(int k=1; k<=6; k++) {
+			for(int j=1; j<=6; j++) {
+				System.out.print("["+ k +", "+ j +"] ");
+			}
+			System.out.println();
 		}
 		
-		String mark = "+";
-		// 1단계 
-		/*
-			+++++
-		*/
-		for(int j=1; j<=5; j++) {
-			System.out.print( mark );
+		// 문제 2
+		// 주사위 2개의 합 별로 나올 수 있는 조합
+		// 합2 : [1,1]
+		// 합3 : [1,2] [2,1]
+		System.out.println("문제 2 ----------- ");
+//		for(int k=1; k<=6; k++) {
+//			for(int j=1; j<=6; j++) {
+//				if(k+j == 4) {
+//					System.out.print("["+ k +", "+ j +"] ");
+//				}
+//			}
+//			System.out.println();
+//		}
+//		for(int k=1; k<=6; k++) {
+//			for(int j=1; j<=6; j++) {
+//				if(k+j == 5) {
+//					System.out.print("["+ k +", "+ j +"] ");
+//				}
+//			}
+//			System.out.println();
+//		}
+		for(int l=2; l<=12; l++) {
+			System.out.print("합이 "+ l +": ");
+			for(int k=1; k<=6; k++) {
+				for(int j=1; j<=6; j++) {
+					if(k+j == l) {
+						System.out.print("["+ k +", "+ j +"] ");
+					}
+				}
+			}
+			System.out.println();
+			
 		}
-		System.out.println();
-		// 2단계
-		String space = ".";
-		/*
-			+.+.+.+.+.
-		*/
-		for(int j=1; j<=5; j++) {
-			System.out.print( mark );
-			System.out.print( space );
-		}
-		System.out.println();
+
 		
-		// 3단계
-		/*
-			+++++
-			+++++
-			+++++
-		*/
-		// 4단계
-		/*
-			11111
-			22222
-			33333
-			44444
-			55555
-		*/
-		// 5단계
-		/*
-			1
-			22
-			333
-			4444
-			55555
-		*/
-		// 6단계
-		/*
-			+
-			++
-			+++
-			++++
-			+++++
-		*/
-		// 7단계
-		/*
-			11111
-			2222
-			333
-			44
-			5
-		*/
-		// 8단계
-		/*
-			+....
-			++...
-			+++..
-			++++.
-			+++++
-		*/
-		// 9단계
-		/*
-			....+
-			...++
-			..+++
-			.++++
-			+++++
-		*/
-		// 10단계
-		/*
-			....+
-			...+++
-			..+++++
-			.+++++++
-			+++++++++
-		*/
-		// 11단계
-		/*
-			....+....
-			...+++...
-			..+++++..
-			.+++++++.
-			+++++++++
-		*/
-		// 12단계
-		// 입력 받은 줄 수대로 출력
-		// 예를 들어 3이면
-		/*
-			..+..
-			.+++.
-			+++++
-		 */	
+		// 문제 3
+		// 합 별 조합의 수 출력
+		System.out.println("문제 3 ----------- ");
+		for(int l=2; l<=12; l++) {
+			System.out.print("합이 "+ l +": ");
+			int cnt = 0; // count약자로 cnt
+			for(int k=1; k<=6; k++) {
+				for(int j=1; j<=6; j++) {
+					if(k+j == l) {
+						System.out.print("["+ k +", "+ j +"] ");
+						cnt++;
+					}
+				}
+			}
+			System.out.print(": 총 개수 : "+ cnt);
+			System.out.println();
+		}
+		
+		// 문제 4
+		// 순서에 관계 없이 중복 제거
+		// 합2 : [1,1]
+		// 합3 : [1,2]와 [2,1]는 같음
+		System.out.println(">>>>> 문제 4 >>>>>>>>>>");
+//		System.out.println("[1,1]");
+//		System.out.println("[1,2]");
+//		System.out.println("[1,3]");
+//		for(int j=1; j<=3; j++) {
+//			System.out.println("[1,"+ j +"]");	
+//		}
+//		
+//		System.out.println("[2,2]");
+//		System.out.println("[2,3]");
+//		for(int j=2; j<=3; j++) {
+//			System.out.println("[2,"+ j +"]");	
+//		}
+//		
+//		System.out.println("[3,3]");
+//		for(int j=3; j<=3; j++) {
+//			System.out.println("[3,"+ j +"]");	
+//		}
+//		
+		for(int k=1; k<=6; k++) {
+			for(int j=k; j<=6; j++) {
+				System.out.println("["+ k +","+ j +"]");
+//				System.out.printf("[%d, %d]", k, j);	
+			}
+			System.out.println();
+		}
+		
+		for(int l=2; l<=12; l++) {
+			System.out.print("합이 "+ l +": ");
+			int cnt = 0; // count약자로 cnt
+			for(int k=1; k<=6; k++) {
+				for(int j=1; j<=6; j++) {
+					if(k+j == l && j >= k) {
+						System.out.print("["+ k +", "+ j +"] ");
+						cnt++;
+					}
+				}
+			}
+			System.out.print(": 총 개수 : "+ cnt);
+			System.out.println();
+		}
+		
+		
+		// 문제 5
+		// 입력받은 정수에 따라 다음과 같이 출력
+		/* 3
+		 * 00 01 02
+		 * 10 11 12
+		 * 20 21 22
+		 */
+		/* 4
+		 * 00 01 02 03
+		 * 10 11 12 13
+		 * 20 21 22 23
+		 * 30 31 32 33
+		 */
+		
+		// 문제 6
+		// 입력받은 정수에 따라 다음과 같이 출력
+		// (정사각형)
+		/* 3
+		 * +++
+		 * +.+
+		 * +++
+		 */
+		/* 5
+		 * +++++
+		 * +...+
+		 * +...+
+		 * +...+
+		 * +++++
+		 */
+		int z = 15;
+		// 한 줄마다
+		for(int j=1; j<=z; j++) {
+
+			// 한 칸마다
+			for(int k=1; k<=z; k++) {
+				// 처음과 마지막 줄
+				if(j == 1 || j == z) {
+					System.out.print("+");
+				}else {
+					// 다른 줄에서
+					
+					// 처음과 마지막 칸
+					if(k==1 || k==z) {
+						System.out.print("+");
+					} else {
+						System.out.print(".");
+					}
+				}
+			}
+			System.out.println();
+		}
+		
 	}
 
 }
