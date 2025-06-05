@@ -92,9 +92,64 @@ public class ArrayExam {
 		bs1[1] = b1+1;
 		bs1[2] = b2+1;
 		
-		int[][] bs = new int[2][3];
+		int[] [] bs = new int[2][3];
 		bs[0] = bs0;
 		bs[1] = bs1;
+		
+		System.out.println("bs.length : "+ bs.length);
+		System.out.println("bs[0].length : "+ bs[0].length);
+		
+		int[] d1 = {1,2,3,4,5};
+		int[] d2 = d1;
+		int[] d3 = {1,2,3,4,5};
+		System.out.println("d1 == d2 : "+ (d1 == d2));
+		System.out.println("d1 == d3 : "+ (d1 == d3));
+		System.out.println(d1);
+		
+		
+		d2[1] = 10;
+		System.out.println("d1[1] : "+ d1[1]); // 10
+		
+		/*
+		 * 	반복문 사용해서 1~10까지 저장,
+			다른 반복문에서 출력
+		 */
+		int[] e1 = new int[10];
+		e1[0] = 1;
+		e1[1] = 2;
+		
+		for(int i=0; i<10; i++) {
+			e1[i] = i+1;
+		}
+		for(int i=0; i<10; i++) {
+			System.out.println("e1["+i+"] : "+ e1[i]);
+		}
+		
+		int[] f = { 4,5,7,2,6,9 };
+		int[] f2 = new int[f.length];
+		
+//		System.out.println(f[0]);
+		for(int i=0; i<f.length; i++) {
+			System.out.println(f[i]);
+			f2[i] = f[i];
+		}
+		
+		for(int i=0; i<f2.length; i++) {
+			System.out.println(f2[i]);
+		}
+		
+		System.out.println("----------------------");
+		for(int i=0; i<f.length; i++) {
+			int data = f[i];
+			System.out.println("data : "+ data);
+		}
+		
+		// 향상된 for문
+		System.out.println("--향상된 for문--------");
+		
+		for( int data : f ) {
+			System.out.println("data : "+ data);
+		}
 		
 	}
 
