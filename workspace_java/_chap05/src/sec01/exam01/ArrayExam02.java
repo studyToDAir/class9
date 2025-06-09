@@ -1,6 +1,6 @@
 package sec01.exam01;
 
-public class ArrayExam {
+public class ArrayExam02 {
 
 	public static void main(String[] args) {
 
