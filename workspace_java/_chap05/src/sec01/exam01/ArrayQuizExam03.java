@@ -217,6 +217,9 @@ public class ArrayQuizExam03 {
 			Scanner scan = new Scanner(System.in);
 			menu = scan.nextInt();
 			
+			int 한글 = 10;
+			
+			
 			switch(menu) {
 				case 1:
 					System.out.println("몇번 자리?(0-9)");

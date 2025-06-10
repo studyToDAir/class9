@@ -20,6 +20,14 @@ public class StudentExam {
 		System.out.println(s1 == s3);
 		
 		System.out.println(s2);
+		
+		System.out.println(  10 / 4.0  );
+		
+//		int a = 10;
+//		double b1 = (double)a;
+//		double b2 = a;
+//		a = (int)b2;
+		
 	}
 
 }

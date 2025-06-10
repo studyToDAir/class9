@@ -5,6 +5,7 @@ public class EnumExam04 {
 	public static void main(String[] args) {
 		
 		Week week;
+		Week week2;
 
 		Week week_m = Week.월;
 //		Week week_m2 = "월요일";
