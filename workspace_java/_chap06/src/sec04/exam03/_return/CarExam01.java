@@ -1,10 +1,11 @@
 package sec04.exam03._return;
 
-public class CarExam {
+public class CarExam01 {
 
 	public static void main(String[] args) {
 		
 		Car car = new Car();
+		car = new Car();
 		boolean status = car.isLeftGas();
 		System.out.println("가스 남았나? "+ status);
 		
@@ -20,6 +21,10 @@ public class CarExam {
 			car.run();
 		}
 		
+		
+		Car2 c2 = new Car2();
+		c2.setGas(3);
+		c2.run();
 	}
 
 }
