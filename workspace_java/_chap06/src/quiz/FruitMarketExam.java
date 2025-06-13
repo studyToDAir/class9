@@ -1,5 +1,7 @@
 package quiz;
 
+import java.util.Scanner;
+
 public class FruitMarketExam {
 
 	public static void main(String[] args) {
@@ -17,6 +19,16 @@ public class FruitMarketExam {
 		market.addFruit(fruit);
 		price = market.ask2("파인애플");
 		System.out.println("파인애플 가격은? " + price);
+		
+		// 스캐너 사용법
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("과일 이름은? ");
+		String name = scanner.nextLine();
+//		int price = scanner.nextInt();
+		price = market.ask2(name);
+		if(price != -1) {
+			System.out.println(name + " 가격은? " + price);
+		}
 	}
 
 }
