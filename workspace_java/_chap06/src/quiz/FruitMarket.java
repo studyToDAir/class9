@@ -11,12 +11,11 @@ public class FruitMarket {
 //	Fruit tomato1 = new Fruit();
 	
 //	int[] arr = new int[10]; // 참고
-	Fruit[] fruits = new Fruit[10];
+	Fruit[] fruits = new Fruit[2];
 	
 	// 생성자
 	// new 하자마자 실행되는 메소드의 일종
 	FruitMarket(String name, String address){
-		System.out.println(fruits[0]);
 		
 		this.name = name;
 		this.address = address;
@@ -29,6 +28,8 @@ public class FruitMarket {
 //		tomato1.price = 2000;
 //		tomato1.stock = 10;
 		init();
+		System.out.println(fruits[0]);
+
 	}
 	
 	void init() {
@@ -106,6 +107,9 @@ public class FruitMarket {
 	int ask2(String fruitName) {
 		// 전체 과일 중에서
 		for(int i=0; i<fruits.length; i++) {
+//			System.out.println("널이라고?");
+//			System.out.println("i:"+ i);
+//			System.out.println("this.fruits[i]:"+ this.fruits[i]);
 			
 			// 전달받은 이름과 같은게 있다면
 			if(this.fruits[i].name.equals(fruitName)) {
@@ -117,5 +121,33 @@ public class FruitMarket {
 		
 		System.out.println("그런 과일 없습니다");
 		return -1;
+	}
+	
+	// 과일 추가 기능
+	// 기존 배열에 새로운 과일클래스를 추가
+	// 메소드 이름 : addFruit
+	// 전달인자    : Fruit
+	// 리턴타입    : void
+	void addFruit(Fruit fruit) {
+//		System.out.println("addFruit >> fruit:" + fruit);
+		// 기존 것의 마지막에 하나 추가
+		
+		// 기존 것 보다 하나 큰 배열 만들기
+		Fruit[] newFruits = new Fruit[this.fruits.length + 1];
+		
+		// 기존 것 복사
+		for(int i=0; i<this.fruits.length; i++) {
+			newFruits[i] = this.fruits[i];
+		}
+		
+		// 마지막 추가
+//		System.out.println("newFruits.length : "+ newFruits.length);
+		newFruits[newFruits.length - 1] = fruit;
+//		for(int i=0; i<newFruits.length; i++) {
+//			System.out.println(newFruits[i]);
+//		}
+		
+		// 새 배열을 기존 배열에 덮어쓰기
+		this.fruits = newFruits;
 	}
 }
