@@ -51,24 +51,27 @@ public class UpDown {
 					// 정답여부
 					boolean ok = false;
 					
+					int count = 0; // 시도횟수
+					
 					while(!ok) {
 	//				while(ok != true) {
 	//				while(ok == false) {
 						
 						System.out.printf("%d ~ %d까지 찍어봐 : ", start, end);
 						int number = s.nextInt();
+						count++;
 						
 						if(this.isDebug) {
 							System.out.println(answer +", "+ number);
 						}
 						
 						if(answer == number) {
-							System.out.println("오~~ㄹ 정답입니다.");
+							System.out.println("오~~ㄹ 정답입니다.(시도:"+count+")");
 							ok = true;
 						} else if(answer > number) {
-							System.out.println("UP↑");
+							System.out.println("UP↑(시도:"+count+")");
 						} else {
-							System.out.println("DOWN↓");
+							System.out.println("DOWN↓(시도:"+count+")");
 						}
 					}
 					

@@ -6,7 +6,7 @@ public class UpDownExam {
 
 //		UpDown game = new UpDown();
 		UpDown game = new UpDown(true);
-		game.start(10, 20);
+		game.start(110, 120);
 		
 	}
 
