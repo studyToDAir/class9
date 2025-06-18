@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        text(기본값) : <input type="text"><br>
+        text(value) : <input type="text" value="값"><br>
+        text(placeholder) : <input type="text" placeholder="플레이스 홀더"><br>
+        text(readonly) : <input type="text" value="값" readonly="readonly"><br>
+        text(disabled) : <input type="text" value="값" disabled="disabled"><br>
+        <br>
+        password : <input type="password" name="pw" placeholder="플레이스 홀더"><br>
+        <br>
+        radio :
+        <input type="radio" name="gender" value="male">
+        남자
+        <input type="radio" name="gender" value="female">여자
+        <input type="radio" name="gender" value="" checked="checked">비공개
+        <br>
+        <input type="radio" name="meet" checked="checked">참석
+        <input type="radio" name="meet" checked="checked" disabled="disabled">미참석
+        <br>
+        submit : <input type="submit" value="전송">
+        <br>
+        checkbox :
+        <input type="checkbox" value="1">생크림
+        <input type="checkbox" value="2" checked="checked">초코칩
+        <input type="checkbox" value="3" disabled="disabled">시럽
+        <input type="checkbox" value="4">샷추가
+        <br>
+        file : <input type="file">
+        <br>
+        reset : <input type="reset">
+        <br>
+        input button : <input type="button" value="이거 버튼임">
+        <br>
+        button : <button type="button">버튼명</button>
+    </form>
+
+    <!--
+        method 종류 : get, post
+        method의 기본값 : get
+
+        action : 전송할 주소
+        action의 기본값 : 지금 내 주소
+    -->
+    <form method="get" action="https://search.naver.com/search.naver">
+        <input type="text" name="query">
+        <input type="submit" value="네이버 검색">
+    </form>
+</body>
+</html>
