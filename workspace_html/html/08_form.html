@@ -31,6 +31,14 @@
         <input type="checkbox" value="2" checked="checked">초코칩
         <input type="checkbox" value="3" disabled="disabled">시럽
         <input type="checkbox" value="4">샷추가
+        
+        <input type="checkbox" value="5" id="pearl"> 
+        <label for="pearl">펄추가label</label>
+        
+        <label for="corn">
+            <input type="checkbox" value="6" id="corn">팝콘추가
+        </label>
+
         <br>
         file : <input type="file">
         <br>
@@ -39,7 +47,53 @@
         input button : <input type="button" value="이거 버튼임">
         <br>
         button : <button type="button">버튼명</button>
+        <br>
+        hidden : <input type="hidden" name="secret" value="1234">
+        <br>
+        <hr>
+        <br>
+        date : <input type="date" value="2025-06-19"><br>
+        color : <input type="color"><br>
+        number : <input type="number"><br>
+        range : <input 
+                    type="range"
+                    min="10"
+                    max="100"
+                    step="10"
+                ><br>
+        <fieldset>
+            <legend>제목</legend>
+            글씨들
+        </fieldset>
+        <br>
+        required, autocomplete : <input type="text" required="required" autocomplete="off">
+        <br>
+        <textarea rows="10" cols="100">
+            1줄
+2줄
+        </textarea>
+        <br>
+        <select name="lunch" size="5" multiple="multiple">
+            <option value="한식">한식</option>
+            <option value="2">양식</option>
+            <option value="3" selected="selected">중식</option>
+            <option value="3">분식</option>
+            <option value="3">분식</option>
+            <option value="3">분식</option>
+            <option value="3">분식</option>
+            <option value="3">분식</option>
+            <option value="3">분식</option>
+            <option value="3">분식</option>
+            <option value="3">분식</option>
+            <option value="3">분식</option>
+            <option value="3">분식</option>
+        </select>
+
     </form>
+
+    <br>
+    <hr>
+    <br>
 
     <!--
         method 종류 : get, post
@@ -49,8 +103,17 @@
         action의 기본값 : 지금 내 주소
     -->
     <form method="get" action="https://search.naver.com/search.naver">
-        <input type="text" name="query">
+        <input type="text" name="query" value="1234">
         <input type="submit" value="네이버 검색">
+    </form>
+
+    <form method="get">
+        <input type="text" name="query" value="1234">
+        <input type="submit" value="get 연습">
+    </form>
+    <form method="post">
+        <input type="text" name="query" value="1234">
+        <input type="submit" value="post 연습">
     </form>
 </body>
 </html>
