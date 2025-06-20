@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #back {
+            height: 100vh;
+            border: 1px solid red;
+
+            /* background-image: url('https://i.namu.wiki/i/B7Ocx8cQf3ED0gnLX4yMCMo8oDtqWJZuce466G4GRgyrIaGrjgnHiguQ6lgBveUgbzFCzaWAJLOIWXd5N1vEc0VwYhJKeXJ60fSsnXkrUUBUXBXiDLU3ERjTbmplWUFK1BNyqLNhsKmOnqaZFlww2g.webp'); */
+            background-image: url('https://i.namu.wiki/i/B7Ocx8cQf3ED0gnLX4yMCMo8oDtqWJZuce466G4GRgyrIaGrjgnHiguQ6lgBveUgbzFCzaWAJLOIWXd5N1vEc0VwYhJKeXJ60fSsnXkrUUBUXBXiDLU3ERjTbmplWUFK1BNyqLNhsKmOnqaZFlww2g.webp'), url('./asset/Spongebob-Christmas-PNG-Picture.png');
+            background-image: url('./asset/Spongebob-Christmas-PNG-Picture.png');
+            background-repeat: /*repeat-x*/ /*repeat-y*/ no-repeat;
+            /* background-size: 200px 300px; */
+            /* background-size: 100% 50%; */
+            /* background-size: 100% 100%; */
+            /* background-size: cover; */
+            background-size: contain;
+            background-position: center;
+        }
+
+        #back2 p {
+            height: 200vh;
+        }
+        #back2 {
+            height: 100vh;
+            background-image: url('https://i.namu.wiki/i/B7Ocx8cQf3ED0gnLX4yMCMo8oDtqWJZuce466G4GRgyrIaGrjgnHiguQ6lgBveUgbzFCzaWAJLOIWXd5N1vEc0VwYhJKeXJ60fSsnXkrUUBUXBXiDLU3ERjTbmplWUFK1BNyqLNhsKmOnqaZFlww2g.webp');
+            background-size: cover;
+            background-attachment: fixed;
+
+            overflow: auto;
+        }
+
+        #back3 {
+            /* background-color: #ffaabb; */
+            background-color: #fab;
+        }
+
+        #back4 {
+            height: 100px;
+
+            /*
+                background : color || image || repeat || attachment || position
+            */
+            background: #808 url('./asset/Spongebob-Christmas-PNG-Picture.png') no-repeat center;
+        }
+    </style>
+</head>
+<body>
+    
+    <p id="back">
+        Background image<br>
+        Background image<br>
+        Background image
+    </p>
+
+    <div id="back3">
+        글씨 하나
+    </div>
+
+    <div id="back2">
+        <p>어떤 글자</p>
+    </div>
+
+    <div id="back4">
+        아무 글씨
+    </div>
+
+</body>
+</html>
