@@ -133,3 +133,41 @@ body {
     max-width: 600px;
 }
 
+/* 
+    마진 중첩
+    세로 방향으로 붙어 있을 때 또는 부모와 첫번째 자식 간에
+    margin이 더해 지지 않고 큰 값 하나만 적용되는 현상
+*/
+/* 해법
+    border, padding 등 적용
+    컨텐츠 적기(<br> 등)
+    부모에 overflow: hidden 주기 - 부모와 첫번째 자식의 중첩 해소
+*/
+
+#div1, #div2, #div3 {
+    
+    /* border: 1px solid red; */
+    
+    /* padding:1px; */
+
+    overflow: hidden;
+}
+#div2, #div3 {
+    /* margin: 30px; */
+    
+    /* margin-top: -1px; */
+
+    margin: 30px;
+}
+#div3 {
+    margin: 50px;
+}
+#div1 {
+    margin: 30px;
+}
+
+#auto {
+    border: 1px solid red;
+    width: 100px;
+    margin: 0 auto;
+}
