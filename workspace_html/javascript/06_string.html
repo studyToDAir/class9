@@ -37,6 +37,43 @@
         let str5 = str.substr(3, 4);
         console.log(str)
         console.log(str5)
+
+
+        // 1번 
+        // 어떤 이메일이라도 id를 출력하도록
+        let mail = "study.todair@gmail.com";
+        // @를 찾는다 : indexOf
+        let idx = mail.indexOf('@');
+        let id = mail.substring(0, idx)
+        console.log(id)
+        // @로 나눈다 : split
+        let mails = mail.split('@')
+        console.log(mails[0])
+
+        // 2번
+        // 메일 주소 앞 두자리를 제외한 id는 *처리
+        // todair@naver.com >> to****@naver.com
+        // study.todair@gmail.com >> st*********@gmail.com
+        let showCnt = 2;
+        let id2 = mail.substr(0, showCnt) // st
+        let count = id.length - showCnt;
+        for(let i=0; i<count; i++){
+            id2 += '*'
+        }
+        id2 += mail.substring(idx);
+        console.log(id2)
+
+        // 3번
+        // 인터넷 주소 중 2차 도메인 출력
+        // comic.naver.com에서 naver
+        // human.or.kr에서 or
+        let domain = 'comic.naver.com'
+        let dot1 = domain.indexOf('.');
+        domain = domain.substring(dot1 + 1)
+        let dot2 = domain.indexOf('.');
+        domain = domain.substring(0, dot2)
+        console.log( domain )
+
     </script>
 </head>
 <body>
