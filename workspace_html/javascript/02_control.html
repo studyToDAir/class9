@@ -89,6 +89,78 @@
             console.log(i, diceSum[i])
         }
 
+        // 함수 배우고 돌아옴
+        console.log('함수 배우고 돌아옴')
+        
+        const arr3 = ["a1", 'b2', 'c3', 'd4']
+        // forEach : 각 항목별로 함수를 실행할 수 있음
+        // 함수의 전달인자 : 현재 값, 현재 index, 전체 배열
+        // return 없음
+        let r1 = arr3.forEach( function(element, index, array) {
+            console.log('element :', element)   // 이번 값
+            console.log('index :', index)       // 이번 index
+            console.log('array :', array)       // 원본 배열
+            // console.log('d :', d)
+            console.log('-----------')
+        })
+        console.log('r1 :', r1)
+
+        const movies = [
+            '노이즈', 
+            'F1 더 무비', 
+            '쥬라기 월드: 새로운 시작',
+            '드래곤 길들이기',
+            '엘리오'
+        ]
+        // map : 각 항목별로 함수를 실행해서 
+        //       return 값으로 구성된 새로운 배열을 돌려 줌
+        // 함수의 전달인자 : 현재 값, 현재 index, 전체 배열
+        let len3 = movies.map( function(el, i, arr){
+            console.log('element :', el)    // 이번 값
+            console.log('index :', i)       // 이번 index
+            console.log('array :', arr)     // 원본 배열
+            
+            console.log('element.length :', el.length)
+            console.log('-----------')
+
+            return el.length;
+        } );
+        console.log('len3:', len3)
+
+        // let len2 = movies.map( function(el){
+        //     return el.length;
+        // } )
+        // let len2 = movies.map( (el) => {
+        //     return el.length;
+        // } )
+        // let len2 = movies.map( el => {
+        //     return el.length;
+        // } )
+        let len2 = movies.map( el => el.length )
+
+        let len = movies.map( el => el.length )
+        console.log( 'len : ', len )
+
+        let filtered = movies.filter(function(element, index, array) {
+            console.log('element :', element)   // 이번 값
+            console.log('index :', index)       // 이번 index
+            console.log('array :', array)       // 원본 배열
+            console.log('-----------')
+
+            let len = element.length;
+            if(len > 4){
+                return true;
+            } else {
+                return false;
+            }
+
+            // return element.length > 4;
+
+        });
+
+        let filtered2 = movies.filter( e => e.length > 4 )
+
+        console.log('filtered', filtered)
     </script>
 </head>
 <body>
