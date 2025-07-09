@@ -13,6 +13,7 @@ function init() {
 
     bind();
 }
+
 function bind() {
     const msg = document.querySelector('#console');
 
@@ -118,6 +119,10 @@ function bind() {
                 game.style.left = (parseInt(game.style.left) + 10) + 'px'
             }
     });
+
+    document.querySelector('#pw').addEventListener('click', btnClick);
+    document.querySelector('#pw').removeEventListener('click', btnClick);
+
 }
 
 function btnClick(){
