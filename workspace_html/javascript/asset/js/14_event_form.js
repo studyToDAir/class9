@@ -66,4 +66,44 @@ function bind(){
         event.preventDefault(); 
     })
 
+    // 콜백을 화살표함수로 하면 this는 여전히 window로 유지됨
+    document.querySelector('#parent')
+        .addEventListener('click', function(event){
+            console.log('부모 클릭')
+
+            // event.target : 이벤트가 발생한 DOM
+            console.log('event.target : ', event.target)
+
+            // event.currentTarget : 이벤트가 적용된 DOM
+            console.log('event.currentTarget : ', event.currentTarget)
+
+            // 이벤트 안에서 this는
+            // 더이상 window가 아니다
+            // js에서 this는 뭔지 알고 있을 때만 사용하세요
+            console.log(this)
+            console.log(this === event.currentTarget)
+
+
+            // DOM.parentNode : 부모로 이동
+            console.log('event.target.parentNode : ', event.target.parentNode)
+            console.log('event.target.parentNode.parentNode : ', event.target.parentNode.parentNode)
+
+    }, true)
+    // document.querySelector('#child1')
+    //     .addEventListener('click', function(event){
+
+    //         // 전파 방지
+    //         // 부모로 전달되는 이벤트 중지
+    //         event.stopPropagation()
+
+    //         console.log('자식1 클릭')
+
+
+    // })
+
+    // this : window 객체를 가지고 있다
+    console.log( '밖', this )
+    console.log( '밖', this === window )
+    // this = window
+
 }

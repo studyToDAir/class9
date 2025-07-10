@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="asset/js/14_event_form.js"></script>
+    <style>
+        #parent {
+            background-color: yellow;
+            padding: 10px;
+        }
+        #child1 {
+            background-color: rgb(255, 174, 0);
+        }
+        #child2 {
+            background-color: rgb(94, 255, 0);
+        }
+    </style>
 </head>
 <body>
     <form id="form" method="get" action="https://search.naver.com/search.naver">
@@ -16,38 +28,10 @@
         <button type="submit">검색</button>
     </form>
     
-    <!--
-        문제 1
-        여러개의 checkbox이 있을 때
-        선택 버튼을 클릭하면
-        선택한 토핑의 값을 따로 출력
-
-        문제2
-        전체 선택을 구현하시오
-            문제2-1
-            전체 선택 체크 시 모두 선택
-            전체 선택 체크 해제 시 모두 선택 해제
-            문제2-2
-            전체 선택 후 하나라도 해제되면 전제 선택도 해제
-            전체 선택이 해제 된 경우에도 모든 요소 선택 시 전체 선택 체크
-    -->
-
-    <div>
-        피자 토핑
-        <hr>
-        <input type="checkbox" class="chk_all">전체선택<br>
-
-        <input type="checkbox" class="chk" value="페페로니">페페로니
-        <input type="checkbox" class="chk" value="베이컨">베이컨
-        <input type="checkbox" class="chk" value="치즈">치즈
-        <input type="checkbox" class="chk" value="파인애플">파인애플
-        <input type="checkbox" class="chk" value="버섯">버섯
-        <input type="checkbox" class="chk" value="옥수수">옥수수
-        <br>
-        <input type="button" value="선택">
-    </div>
-    <div>
-        토핑 : 베이컨, 치즈, 옥수수
+    <div id="parent">
+        부모
+        <div id="child1">자식1</div>
+        <div id="child2">자식2</div>
     </div>
 </body>
 </html>
