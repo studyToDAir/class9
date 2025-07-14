@@ -82,6 +82,9 @@
                     }
             })
         }
+
+        
+
         // ### 3번
         // 메뉴가 여러개일 때 선택한 메뉴'만' 특이하게 보이게
         function quiz3() {
@@ -94,7 +97,6 @@
                     lis.forEach(function(li){
                         li.classList.remove('active')
                     })
-
                     lis.forEach(li => li.classList.remove('active'))
 
                     event.target.classList.add('active')
