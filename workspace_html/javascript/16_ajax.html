@@ -32,6 +32,14 @@
                         console.log(data[0]['username'])
                         console.log(data[0].address.geo.lat)
                     }
+
+                    // xhr.onreadystatechange = function(){
+                    //     console.log(xhr.readystate)
+                    //     // if(xhr.readystate = 4)
+                    //     if(xhr.readystate = XMLHttpRequest.DONE) {
+                    //         console.log('다녀왔습니다')
+                    //     }
+                    // }
                 })
             document.querySelector('#btn2')
                 .addEventListener('click', function () {
@@ -85,7 +93,7 @@
                 })
             document.querySelector('#btn5')
                 .addEventListener('click', function () {
-                    
+
                     const serviceKey = 'qVTaW2lslPLGXY2uHKVY3Vuc66ZQmC950RmMKYEg4Grvfz%2FeYbsd%2Fp4F0CzdQQwC26aBf2fTEHW76VU0OA04RQ%3D%3D'
                     let url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst'
                     url += '?serviceKey=' + serviceKey
@@ -181,6 +189,29 @@
                         }
                     }
                 })
+
+            document.querySelector('#btn6')
+                .addEventListener('click', function () {
+                
+                    const url = 'https://jsonplaceholder.typicode.com/users'
+                    const option = {
+                        method: 'get'
+                    }
+
+                    console.log(1)
+                    fetch(url, option)
+                        .then(function(response){
+                            return response.json()
+                        }).then(function(data){
+                            console.log(data)
+                        }).catch(function(error){
+                            console.log(error)
+                        })
+
+                    console.log(3)
+
+                })
+
         }
     </script>
 </head>
@@ -191,6 +222,7 @@
     <button type="button" id="btn3">네이버주식</button><br>
     <button type="button" id="btn4">휴먼잡스</button><br>
     <button type="button" id="btn5">날씨예보</button><br>
+    <button type="button" id="btn6">fetch</button><br>
 
     <div>
         <table border=1>
