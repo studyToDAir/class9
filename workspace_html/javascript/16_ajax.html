@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script>
         window.addEventListener('load', bind)
         function bind() {
@@ -212,6 +213,86 @@
 
                 })
 
+            $('#btn7').off('click').on('click', function(){
+                // 스피너-로딩중 표시
+                $.ajax({
+                    url: 'http://naver.com',
+                    type: 'get',
+                    success: function(data){
+                        console.log('성공')
+                        // json일 경우 알아서 json으로 넘어옴
+                        console.log(data)
+                    },
+                    error: function(data){
+                        console.log('실패')
+                        console.log('ERROR', data)
+                    },
+                    complete: function(){
+                        console.log('무조건 실행')
+                    }
+                })
+            })
+
+
+            try {
+                console.log(1, '실행')
+                // throw new Error('에러')
+                console.log(2, '여전히 실행 중')
+            } catch (err) {
+                console.log(3, 'catch')
+                console.log(4, err)
+            } finally {
+                console.log(5, '무조건 실행')
+            }
+            console.log('요기?')
+
+            $('#btn8').off('click').on('click', function(){
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/users',
+                    type: 'get'
+                }).done(function(data){
+                    console.log('성공')
+                    console.log(data)
+                }).fail(function(data){
+                    console.log('실패')
+                    console.log('ERROR', data)
+                }).always(function(){
+                    console.log('무조건 실행')
+                })
+            })
+
+            $('#btn9').on('click', function(){
+                let msg = $('#msg').val().replace(/\n/g, '%0a')
+                $.ajax({
+                    url: 'https://api.telegram.org/bot8158265202:AAEGFcZaKxkqLBQOK_i2J3_8-GnRJZyR6A8/sendMessage?chat_id=5812403900&text='+msg,
+                    type: 'get'
+                })
+            })
+
+            $('#btn10').on('click', function(){
+                let msg = $('#msg2').val()
+                const key = 'AIzaSyC9apUpgODDU-Nq9MuziXJ0J59A-DZuzh4'
+                const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key='+key
+                const data = {
+                    contents: {
+                        role: 'user',
+                        parts: [{
+                            text: msg
+                        }]
+                    }
+                }
+                const xhr = new XMLHttpRequest();
+                xhr.open('post', url)
+                xhr.setRequestHeader('Content-Type', 'application/json')
+                xhr.send( JSON.stringify(data) )
+                xhr.onload = function(){
+                    console.log('젬미니가 말한다')
+                    console.log(xhr.responseText)
+                    const response = JSON.parse(xhr.responseText)
+                    const answer = response.candidates[0].content.parts[0].text
+                    $('#gemini').html( answer.replace(/\n/g, '<br>') )
+                }
+            })
         }
     </script>
 </head>
@@ -223,6 +304,21 @@
     <button type="button" id="btn4">휴먼잡스</button><br>
     <button type="button" id="btn5">날씨예보</button><br>
     <button type="button" id="btn6">fetch</button><br>
+    <button type="button" id="btn7">jQuery</button><br>
+    <button type="button" id="btn8">jQuery2</button><br>
+
+    <hr>
+        <textarea id="msg"></textarea>
+        <br>
+        <button id="btn9">텔레그램 발송</button>
+    <hr>
+        <textarea id="msg2"></textarea>
+        <br>
+        <button id="btn10">gemini에게 물어보기</button>
+        <br>
+        <div id="gemini"></div>
+    <hr>
+
 
     <div>
         <table border=1>
