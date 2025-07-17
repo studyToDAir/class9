@@ -7,6 +7,7 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script>
+        let _contents = []
         window.addEventListener('load', bind)
         function bind() {
             document.querySelector('#btn1')
@@ -273,14 +274,18 @@
                 let msg = $('#msg2').val()
                 const key = 'AIzaSyC9apUpgODDU-Nq9MuziXJ0J59A-DZuzh4'
                 const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key='+key
+                _contents.push({
+                    role: 'user',
+                    parts: [{
+                        text: msg
+                    }]
+                })
+
                 const data = {
-                    contents: {
-                        role: 'user',
-                        parts: [{
-                            text: msg
-                        }]
-                    }
+                    contents: _contents
                 }
+                
+
                 const xhr = new XMLHttpRequest();
                 xhr.open('post', url)
                 xhr.setRequestHeader('Content-Type', 'application/json')
@@ -291,6 +296,15 @@
                     const response = JSON.parse(xhr.responseText)
                     const answer = response.candidates[0].content.parts[0].text
                     $('#gemini').html( answer.replace(/\n/g, '<br>') )
+
+                    _contents.push({
+                        role: 'model',
+                        parts: [{
+                            text: answer
+                        }]
+                    })
+
+
                 }
             })
         }

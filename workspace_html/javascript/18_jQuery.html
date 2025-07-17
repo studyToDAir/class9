@@ -140,6 +140,14 @@
                 // event.stopPropagation()
                 console.log('this', this)
                 console.log('event.target', event.target)
+
+                // 자식 중에서 찾기
+                // $('#parent10')[0].querySelector
+                $('#parent10').find('.child10')
+
+                // 부모로 올라가기
+                // $('#parent10')[0].parentNode
+                $('#parent10').parent()
             })
             $('.child10').on('click', function(event){
                 // event.stopPropagation()

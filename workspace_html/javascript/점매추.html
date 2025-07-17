@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            border: 1px solid red;
+        }
+
+        #jummechu h1 {
+            text-align: center;
+        }
+
+        #jummechu .round {
+            text-align: center;
+        }
+
+        #jummechu .choice {
+            display: flex;
+            justify-content: space-evenly;
+            height: 100px;
+            line-height: 100px;
+        }
+
+        #jummechu .choice .menu {
+            width: 200px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        let menu = []
+        menu.push('콩나물비빔밥')
+        menu.push('마라탕')
+        menu.push('달식당 돈까스')
+        menu.push('달식당 김밥')
+        menu.push('잔치국수')
+        menu.push('맘스터치')
+        menu.push('왕만두')
+        menu.push('순대국밥')
+        menu.push('라면')
+        menu.push('닭가슴살')
+        menu.push('제육')
+        menu.push('짜장면')
+        menu.push('쌀국수')
+        menu.push('경양식 돈까스')
+        menu.push('피자')
+        menu.push('볶음밥')
+        menu.push('옹심이')
+        menu.push('콩국수')
+
+        let round = 4; // 몇강
+        let match = 1;  // 그중에 현재 몇번째
+        let winnerIdxs = menu
+        let currMatchIdx = []
+
+        window.addEventListener('load', function () {
+            matchPick()
+            matchShow()
+            bind()
+        })
+
+        function matchPick() {
+            let idx = -1;
+            for (let i = 0; i < round; i++) {
+                do {
+                    idx = parseInt(Math.random() * winnerIdxs.length)
+                } while (currMatchIdx.indexOf(idx) != -1)
+                currMatchIdx.push(idx)
+            }
+            winnerIdxs = []
+            // console.log(currMatchIdx)
+        }
+
+        function matchShow() {
+            document.querySelector('#jummechu .round .text')
+                .innerText = `${round}강 ${match}/${round / 2}`
+
+            const vs1 = document.querySelector('#jummechu .choice .vs1')
+            const vs2 = document.querySelector('#jummechu .choice .vs2')
+
+            const idx1 = currMatchIdx.pop()
+            const idx2 = currMatchIdx.pop()
+
+            vs1.innerHTML = menu[idx1]
+            vs1.setAttribute('data-idx', idx1)
+            vs2.innerHTML = menu[idx2]
+            vs2.setAttribute('data-idx', idx2)
+        }
+
+        function bind() {
+            document.querySelector('#jummechu .choice').addEventListener('click', function (event) {
+                if (event.target.classList.contains('menu')) {
+                    // console.log(event.target)
+
+                    match++
+                    console.log('match', match, (round / 2))
+                    if (match <= (round / 2)) {
+                        const winnerIdx = event.target.getAttribute('data-idx')
+                        winnerIdxs.push(winnerIdx)
+
+                        matchShow()
+                    } else {
+                        round /= 2
+                        console.log(1, 'round', round)
+                        if(round != 1){
+                            console.log('이거')
+                            match = 1
+                            currMatchIdx = []
+                            // winnerIdxs = []
+                            matchPick()
+                            matchShow()
+                        } else {
+                            console.log(2, 'round', round)
+                            console.log('winnerIdxs', winnerIdxs)
+                        }
+                    }
+                }
+            })
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id="jummechu">
+        <div>
+            <h1>오점뭐</h1>
+        </div>
+        <div class="round">
+            <div class="text">16강 1/8</div>
+            <!-- <div class="gage">게이지</div> -->
+        </div>
+        <div class="choice">
+            <div class="menu vs1">짜장면</div>
+            <div class="vs">VS</div>
+            <div class="menu vs2">제육덮밥</div>
+        </div>
+    </div>
+</body>
+
+</html>
