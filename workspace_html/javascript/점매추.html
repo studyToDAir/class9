@@ -10,6 +10,10 @@
             border: 1px solid red;
         }
 
+        .hide {
+            display: none !important;
+        }
+
         #jummechu h1 {
             text-align: center;
         }
@@ -28,6 +32,10 @@
         #jummechu .choice .menu {
             width: 200px;
             text-align: center;
+        }
+
+        #jummechu .choice .menu.winner {
+            border: 3px solid red;
         }
     </style>
     <script>
@@ -51,27 +59,43 @@
         menu.push('옹심이')
         menu.push('콩국수')
 
-        let round = 4; // 몇강
-        let match = 1;  // 그중에 현재 몇번째
-        let winnerIdxs = menu
-        let currMatchIdx = []
+        let round, // 몇강
+            match,  // 그중에 현재 몇번째
+            winnerIdxs,
+            currMatchIdx
 
         window.addEventListener('load', function () {
-            matchPick()
-            matchShow()
             bind()
         })
 
-        function matchPick() {
-            let idx = -1;
-            for (let i = 0; i < round; i++) {
-                do {
-                    idx = parseInt(Math.random() * winnerIdxs.length)
-                } while (currMatchIdx.indexOf(idx) != -1)
-                currMatchIdx.push(idx)
-            }
+        function initRound() {
+            round = 4; // 몇강
+            match = 1;  // 그중에 현재 몇번째
             winnerIdxs = []
-            // console.log(currMatchIdx)
+            currMatchIdx = []
+
+            document.querySelector('#jummechu .choice').addEventListener('click', choice)
+        }
+
+        function matchPick() {
+            // 메뉴만큼 0~인덱스 초기값 들어있는 배열?
+            let list = winnerIdxs.length != 0 ? winnerIdxs : new Array(menu.length)
+            let idx = -1;
+
+            for (let i = list.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                let tmp = list[i]
+                list[i] = list[j]
+                list[j] = tmp
+            }
+            currMatchIdx = list
+            // for (let i = 0; i < round; i++) {
+            //     do {
+            //         idx = parseInt(Math.random() * winnerIdxs.length)
+            //     } while (currMatchIdx.indexOf(idx) != -1)
+            //     currMatchIdx.push(idx)
+            // }
+            winnerIdxs = []
         }
 
         function matchShow() {
@@ -91,34 +115,49 @@
         }
 
         function bind() {
-            document.querySelector('#jummechu .choice').addEventListener('click', function (event) {
-                if (event.target.classList.contains('menu')) {
-                    // console.log(event.target)
-
-                    match++
-                    console.log('match', match, (round / 2))
-                    if (match <= (round / 2)) {
-                        const winnerIdx = event.target.getAttribute('data-idx')
-                        winnerIdxs.push(winnerIdx)
-
-                        matchShow()
-                    } else {
-                        round /= 2
-                        console.log(1, 'round', round)
-                        if(round != 1){
-                            console.log('이거')
-                            match = 1
-                            currMatchIdx = []
-                            // winnerIdxs = []
-                            matchPick()
-                            matchShow()
-                        } else {
-                            console.log(2, 'round', round)
-                            console.log('winnerIdxs', winnerIdxs)
-                        }
-                    }
+            document.querySelector('#jummechu .start').addEventListener('click', function (event) {
+                initRound()
+                matchPick()
+                matchShow()
+                document.querySelector('#jummechu .choice').classList.remove('hide');
+                document.querySelectorAll('#jummechu .choice div').forEach(function (div) {
+                    div.classList.remove('hide')
+                })
+                if (document.querySelector('.winner')) {
+                    document.querySelector('.winner').classList.remove('winner')
                 }
             })
+
+
+        }
+
+        function choice(event) {
+            if (event.target.classList.contains('menu')) {
+
+                match++
+                if (match <= (round / 2)) {
+                    const winnerIdx = event.target.getAttribute('data-idx')
+                    winnerIdxs.push(Number(winnerIdx))
+
+                    matchShow()
+                } else {
+                    round /= 2
+                    if (round != 1) {
+                        match = 1
+                        currMatchIdx = []
+                        matchPick()
+                        matchShow()
+                    } else {
+                        event.target.classList.add('winner')
+                        document.querySelectorAll('#jummechu .choice div:not(.winner)').forEach(function (div) {
+                            div.classList.add('hide')
+                        })
+                        document.querySelector('#jummechu .round .text').innerText = '우승'
+                        initRound()
+                        document.querySelector('#jummechu .choice').removeEventListener('click', choice)
+                    }
+                }
+            }
         }
 
     </script>
@@ -133,7 +172,8 @@
             <div class="text">16강 1/8</div>
             <!-- <div class="gage">게이지</div> -->
         </div>
-        <div class="choice">
+        <button type="button" class="start">시작!</button>
+        <div class="choice hide">
             <div class="menu vs1">짜장면</div>
             <div class="vs">VS</div>
             <div class="menu vs2">제육덮밥</div>
