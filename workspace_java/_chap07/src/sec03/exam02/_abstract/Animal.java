@@ -1,6 +1,10 @@
 package sec03.exam02._abstract;
 
 public abstract class Animal {
+	
+	Animal(int maxAge){
+		
+	}
 
 	String kind;
 	
