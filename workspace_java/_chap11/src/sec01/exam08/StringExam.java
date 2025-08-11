@@ -3,6 +3,8 @@ package sec01.exam08;
 public class StringExam {
 
 	public static void main(String[] args) {
+		
+		System.gc();
 
 		String s1 = "영일이삼사오육칠팔구삼사";
 		
@@ -76,9 +78,49 @@ public class StringExam {
 		// lo**@naver.com 이케이케
 		
 		// 문제4 검색어 찾기
-		// https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=1234&ackey=1oiioasi
+		// https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=1234&ackey=1oiioasi        
 		// 키 query의 값이 검색어
 		// 검색어만 출력
+		
+		String s5 = "  글씨   중간공백    ";
+		System.out.println("["+ s5 +"]");
+		System.out.println("["+ s5.trim() +"]");
+		
+		String menu = "김밥,라면,돈까스,제육덮밥";
+		String[] menus = menu.split(",");
+		for(String m : menus) {
+			System.out.println(m);
+		}
+		
+		String url = "blog.naver.com";
+		// split 정규 표현식을 사용(String 아님에 주의)
+		// .은 정규 표현식에서 사용하는 의미있는 예약어라서 
+		// 문자.으로 인식하지 않는다
+//		String[] urls = url.split(".");
+//		String[] urls = url.split("\\."); // .을 표현하는 방법 1
+		String[] urls = url.split("[.]"); // .을 표현하는 방법 2
+		System.out.println( urls.length );
+		
+		String a = "a";
+		a += "b";
+		a = a + "c";
+		
+		// StringBuffer
+		// 메모리를 효율적으로 사용한다
+		// StringBuilder 보다 쪼끔느리다
+		// 스레드에 안전하다(Thread-safe)
+		StringBuffer sb = new StringBuffer("a");
+		sb.append("b");
+		sb.append("c");
+		String d = sb.toString();
+
+		// 쓰레드에 안전하지 않다
+		StringBuilder sbb = new StringBuilder("a");
+		sbb.append("b");
+		String d2 = sbb.toString();
+		
+		long e = 3000000000L;
+		float f = 2.5f;
 	}
 
 }
