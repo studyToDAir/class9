@@ -77,4 +77,56 @@ public class TodoDAO {
 
 		return list;
 	}
+	
+	Connection getConnection() {
+		Connection conn = null;
+		try {
+			// JNDI 방식으로
+			// context.xml에 있는 DB 정보를 가져온다
+			Context ctx = new InitialContext();
+			// DataSource : 커넥션 풀 관리자
+			DataSource dataFactory = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
+
+			// DB 접속
+			conn = dataFactory.getConnection();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return conn;
+	}
+	
+	// 자료 삽입
+	// 메소드명: insert
+	// 전달인자: TodoDTO
+	//// 리턴타입: 아직 모르겠다
+	// 리턴타입: int; insert된 행의 수
+	public int insert(TodoDTO dto) {
+		int result = -1;
+		
+		try {
+			// 접속
+			Connection conn = getConnection();
+			
+			// SQL 준비
+			String query = " insert into";
+			query += " tbl_todo (tno, title, duedate, finished)";
+			query += " values (seq_tbl_todo.nextval, '"+ dto.getTitle() +"', '"+ dto.getDuedate() +"', "+ dto.getFinished() +")";
+			PreparedStatement ps = conn.prepareStatement(query);
+
+			// SQL 실행 및 결과 확보
+			// select 실행 : executeQuery();
+			// 그 외 실행 : executeUpdate();
+			
+			result = ps.executeUpdate();
+			// 결과 활용
+			System.out.println(result +" 행 이(가) 삽입되었습니다.");
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }

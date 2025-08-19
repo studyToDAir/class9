@@ -61,6 +61,17 @@ public class TodoContoller extends HttpServlet {
 		todoDTO.setDuedate(date_duedate);
 		
 		System.out.println(todoDTO);
+		
+		TodoService todoService = new TodoService();
+		int result = todoService.addTodo(todoDTO);
+		
+		if(result == -1) {
+			response.getWriter().println("<script>");
+			response.getWriter().println("alert('추가 실패')");
+			response.getWriter().println("</script>");
+		} else {
+			response.sendRedirect("todo");
+		}
 	}
 
 }

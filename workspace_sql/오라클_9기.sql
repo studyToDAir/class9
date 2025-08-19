@@ -1244,9 +1244,18 @@ desc emp;
 desc dept;
 
 
+drop table tbl_todo;
+create table tbl_todo (
+	tno number primary key,
+	title varchar2(4000) not null,
+	dueDate date,
+	finished number(1)
+);
+select * from tbl_todo;
 
+create sequence seq_tbl_todo;
 
+insert into tbl_todo (tno, title, duedate, finished)
+values (seq_tbl_todo.nextval, '연습1', to_date('2025-08-20', 'yyyy-mm-dd'), 0);
 
-
-
-
+commit;

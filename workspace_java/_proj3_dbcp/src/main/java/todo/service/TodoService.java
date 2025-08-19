@@ -12,4 +12,12 @@ public class TodoService {
 		return todoDAO.selectAll();
 	}
 	
+	public int addTodo(TodoDTO todoDTO) {
+		if(todoDTO.getTitle() == null) {
+			return -1;
+		}
+		TodoDAO todoDAO = new TodoDAO();
+		return todoDAO.insert(todoDTO);
+	}
+	
 }
