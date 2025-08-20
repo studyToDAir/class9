@@ -20,4 +20,25 @@ public class TodoService {
 		return todoDAO.insert(todoDTO);
 	}
 	
+	public int removeTodo(TodoDTO todoDTO) {
+		TodoDAO todoDAO = new TodoDAO();
+		return todoDAO.delete(todoDTO);
+	}
+	
+	public TodoDTO getTodo(TodoDTO todoDTO) {
+		TodoDAO todoDAO = new TodoDAO();
+		return todoDAO.selectTodo(todoDTO);
+	}
+	public int modifyTodo(TodoDTO todoDTO) {
+		TodoDAO todoDAO = new TodoDAO();
+		return todoDAO.updateTodo(todoDTO);
+	}
 }
+
+
+
+
+
+
+
+

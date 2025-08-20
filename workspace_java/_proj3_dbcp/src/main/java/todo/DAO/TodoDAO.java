@@ -112,8 +112,12 @@ public class TodoDAO {
 			// SQL 준비
 			String query = " insert into";
 			query += " tbl_todo (tno, title, duedate, finished)";
-			query += " values (seq_tbl_todo.nextval, '"+ dto.getTitle() +"', '"+ dto.getDuedate() +"', "+ dto.getFinished() +")";
+//			query += " values (seq_tbl_todo.nextval, '"+ dto.getTitle() +"', '"+ dto.getDuedate() +"', "+ dto.getFinished() +")";
+			query += " values (seq_tbl_todo.nextval, ?, ?, ?)";	// 변수 방식
 			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1, dto.getTitle());
+			ps.setDate(2, dto.getDuedate());
+			ps.setInt(3, dto.getFinished());
 
 			// SQL 실행 및 결과 확보
 			// select 실행 : executeQuery();
@@ -123,10 +127,114 @@ public class TodoDAO {
 			// 결과 활용
 			System.out.println(result +" 행 이(가) 삽입되었습니다.");
 			
+			ps.close();
+			conn.close();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 		return result;
 	}
+	
+	public int delete(TodoDTO dto) {
+		int result = -1;
+
+		try {
+			// 접속
+			Connection conn = getConnection();
+			
+			String query = " delete tbl_todo";
+			query       += " where tno = ? ";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, dto.getTno());
+			
+			result = ps.executeUpdate();
+			
+			ps.close();
+			conn.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public TodoDTO selectTodo(TodoDTO dto) {
+		
+		TodoDTO resultDTO = null;
+		
+		try {
+			
+			// DB접속
+			Connection conn = getConnection();
+			// SQL 준비
+			String sql = " select * from tbl_todo";
+			       sql += " where tno = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, dto.getTno());
+			
+			// 실행하고 결과 확보
+			ResultSet rs = ps.executeQuery();
+			// 결과 활용
+			while(rs.next()) {
+				resultDTO = new TodoDTO();
+				
+				int tno = rs.getInt("tno");
+				resultDTO.setTno(tno);
+				resultDTO.setTitle( rs.getString("title") );
+				resultDTO.setDuedate( rs.getDate("duedate") );
+				resultDTO.setFinished( rs.getInt("finished") );
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return resultDTO;
+	}
+	
+	public int updateTodo(TodoDTO todoDTO) {
+		int result = -1;
+		
+		try {
+			// DB접속
+			Connection conn = getConnection();
+			
+			String query = "";
+			query += " update tbl_todo";
+			query += " set title = ?,";
+			query += "     duedate = ?,";
+			query += "     finished = ?";
+			query += " where tno = ?";
+			
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1, todoDTO.getTitle());
+			ps.setDate(2, todoDTO.getDuedate());
+			ps.setInt(3, todoDTO.getFinished());
+			ps.setInt(4, todoDTO.getTno());
+			
+			result = ps.executeUpdate();
+			System.out.println(result +" 행 이(가) 업데이트되었습니다.");
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
