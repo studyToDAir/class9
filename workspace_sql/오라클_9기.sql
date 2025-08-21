@@ -1259,3 +1259,16 @@ insert into tbl_todo (tno, title, duedate, finished)
 values (seq_tbl_todo.nextval, '연습1', to_date('2025-08-20', 'yyyy-mm-dd'), 0);
 
 commit;
+
+select * from emp2;
+
+create table emp2
+as select * from emp;
+
+select * from emp2
+where empno = 7369;
+
+delete emp2
+where empno = 7369;
+
+

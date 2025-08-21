@@ -20,4 +20,7 @@ public class EmpService {
 		return dto;
 	}
 	
+	public int removeEmp(EmpDTO empDTO) {
+		return empDAO.deleteEmp(empDTO);
+	}
 }

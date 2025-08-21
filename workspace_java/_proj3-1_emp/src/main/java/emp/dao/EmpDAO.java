@@ -85,7 +85,6 @@ public class EmpDAO {
 //			while( rs.next() ) {
 			if(rs.next()) {
 				resultDTO = new EmpDTO();
-				
 				int empno = rs.getInt("empno");
 				resultDTO.setEmpno(empno);
 				resultDTO.setEname( 	rs.getString("ename") );
@@ -102,6 +101,27 @@ public class EmpDAO {
 		}
 		
 		return resultDTO;
+	}
+	
+	public int deleteEmp(EmpDTO empDTO) {
+		int result = -1;
+		try {
+			// DB 접속
+			Connection conn = getConn();
+			
+			String query = " delete emp2";
+				   query += " where empno = ?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, empDTO.getEmpno());
+			
+			// select가 아님
+			result = ps.executeUpdate();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 }
 
