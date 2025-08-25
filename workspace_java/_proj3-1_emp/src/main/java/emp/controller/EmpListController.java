@@ -19,6 +19,8 @@ public class EmpListController extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("/list doGet 실행");
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		
 		// DB 조회
 		EmpService empService = new EmpService();
@@ -28,6 +30,7 @@ public class EmpListController extends HttpServlet {
 		// 화면에 출력(응답 정적 자원 만들기)
 		PrintWriter out = response.getWriter();
 		
+		out.println("<a href='signup.html'>회원가입</a>");
 		out.println("<table border=1>");
 		out.println("	<tr>");
 		out.println("		<th>empno</th>");

@@ -123,6 +123,70 @@ public class EmpDAO {
 		
 		return result;
 	}
+	
+	public int insertEmp(EmpDTO empDTO) {
+		int result = -1;
+		try {
+			// DB 접속
+			Connection conn = getConn();
+			
+			String query = " insert into emp2 (empno, ename, job, mgr, hiredate, sal, comm, deptno)";
+			      query += " values(?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, empDTO.getEmpno());
+			ps.setString(2, empDTO.getEname());
+			ps.setString(3, empDTO.getJob());
+			ps.setInt(4, empDTO.getMgr());
+			ps.setDate(5, empDTO.getHiredate());
+			ps.setInt(6, empDTO.getSal());
+			ps.setInt(7, empDTO.getComm());
+			ps.setInt(8, empDTO.getDeptno());
+			
+			// select가 아님
+			result = ps.executeUpdate();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public int updateEmp(EmpDTO empDTO) {
+		int result = -1;
+		try {
+			// DB 접속
+			Connection conn = getConn();
+			
+			String query = " update emp2";
+			      query += " set ename = ?,";
+			      query += "     job = ?,";
+			      query += "     mgr = ?,";
+			      query += "     hiredate = ?,";
+			      query += "     sal = ?,";
+			      query += "     comm = ?,";
+			      query += "     deptno = ?";
+			      query += " where empno = ?";
+			
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1, empDTO.getEname());
+			ps.setString(2, empDTO.getJob());
+			ps.setInt(3, empDTO.getMgr());
+			ps.setDate(4, empDTO.getHiredate());
+			ps.setInt(5, empDTO.getSal());
+			ps.setInt(6, empDTO.getComm());
+			ps.setInt(7, empDTO.getDeptno());
+			ps.setInt(8, empDTO.getEmpno());
+			
+			// select가 아님
+			result = ps.executeUpdate();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
 
 

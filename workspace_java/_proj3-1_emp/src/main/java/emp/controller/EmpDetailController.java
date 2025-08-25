@@ -41,6 +41,9 @@ public class EmpDetailController extends HttpServlet {
 			EmpService empService = new EmpService();
 			EmpDTO empDTO2 = empService.getOneEmp(empDTO);
 			
+//			request.setAttribute("dto", empDTO2);
+//			request.getRequestDispatcher("detail.jsp").forward(request, response);
+			
 			PrintWriter out = response.getWriter();
 			out.println("<table border=1>");
 			out.println("	<tr><td>empno</td><td>"+ empDTO2.getEmpno() +"</td><tr>");
@@ -57,7 +60,10 @@ public class EmpDetailController extends HttpServlet {
 			out.println("	<input type='hidden' name='empno' value='"+ empDTO2.getEmpno() +"'>");
 			out.println("	<input type='submit' value='삭제'>");
 			out.println("</form>");
-			
+			out.println("<form method='get' action='edit'>");
+			out.println("	<input type='hidden' name='empno' value='"+ empDTO2.getEmpno() +"'>");
+			out.println("	<input type='submit' value='수정'>");
+			out.println("</form>");
 			
 		}catch (Exception e) {
 			e.printStackTrace();
