@@ -165,7 +165,7 @@
       <Context docBase="_proj1_hello" path="/_proj1_hello" reloadable="true" source="org.eclipse.jst.jee.server:_proj1_hello"/>
       <Context docBase="_proj2_request" path="/_proj2_request" reloadable="true" source="org.eclipse.jst.jee.server:_proj2_request"/>
       <Context docBase="_proj3_dbcp" path="/_proj3_dbcp" reloadable="true" source="org.eclipse.jst.jee.server:_proj3_dbcp"/>
-      <Context docBase="_proj3-1_emp" path="/_proj3-1_emp" reloadable="true" source="org.eclipse.jst.jee.server:_proj3-1_emp"/><Context docBase="_proj4_jsp" path="/_proj4_jsp" reloadable="true" source="org.eclipse.jst.jee.server:_proj4_jsp"/></Host>
+      <Context docBase="_proj3-1_emp" path="/_proj3-1_emp" reloadable="true" source="org.eclipse.jst.jee.server:_proj3-1_emp"/><Context docBase="_proj4_jsp" path="/_proj4_jsp" reloadable="true" source="org.eclipse.jst.jee.server:_proj4_jsp"/><Context docBase="_proj4-1_login" path="/_proj4-1_login" reloadable="true" source="org.eclipse.jst.jee.server:_proj4-1_login"/><Context docBase="_proj5_file" path="/_proj5_file" reloadable="true" source="org.eclipse.jst.jee.server:_proj5_file"/></Host>
     </Engine>
   </Service>
 </Server>
