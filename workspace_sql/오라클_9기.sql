@@ -1271,4 +1271,63 @@ where empno = 7369;
 delete emp2
 where empno = 7369;
 
+select * from emp2;
+-- 1. 입사일 기준으로 내림차순
+select * from emp2
+order by hiredate desc;
+-- 각자 번호 붙이기
+select rownum, emp2.* from emp2
+order by hiredate desc;
+
+
+/* 5 */ select job j, count(*) as cnt
+/* 1 */ from emp
+/* 2 */ where sal > 1000
+/* 3 */ group by job
+/* 4 */    having count(*) >= 3
+/* 6 */ order by cnt;
+
+select rownum, t1.* from (
+    select emp2.* from emp2
+    order by hiredate desc
+) t1;
+
+select * from (
+    select rownum rnum, t1.* from (
+        select emp2.* from emp2
+        where lower(ename) like lower('%'|| 'null' ||'%')
+        order by hiredate desc
+    ) t1
+) t2
+where rnum >= 3 and rnum <= 6;
+
+truncate table emp2;
+
+INSERT INTO emp2 (empno, ename, job, mgr, hiredate, sal, comm, deptno)
+SELECT 
+    e.empno + lvl AS empno,                                 -- empno 증가
+    lvl || '_' || e.ename AS ename,                         -- 이름 앞 숫자
+    e.job, 
+    e.mgr,
+    e.hiredate + lvl AS hiredate,                           -- 하루씩 증가
+    e.sal + lvl AS sal,                                     -- sal 1씩 증가
+    e.comm, 
+    e.deptno
+FROM emp e
+JOIN (
+    SELECT LEVEL AS lvl 
+    FROM dual 
+    CONNECT BY LEVEL <= 23
+) l
+ON 1=1;
+
+select * from emp2;
+commit;
+
+select count(*) from emp2;
+
+
+
+
+
 

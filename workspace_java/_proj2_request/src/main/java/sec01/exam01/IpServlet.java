@@ -22,18 +22,23 @@ public class IpServlet extends HttpServlet {
 		System.out.println("getMethod : "+ request.getMethod());
 		
 		// 접근 주소 전체. 단, 쿼리스트링 제외
+		// http부터 싹 ?전까지
+//		http://localhost:8080/_proj6_filter/main/my
 		System.out.println("getRequestURL : "+ request.getRequestURL());
 		
 		// 쿼리스트링만 가져오기
 		System.out.println("getQueryString : "+ request.getQueryString());
 		
 		// ip, port, 쿼리스트링을 제외한 주소
+		// /_proj6_filter/main/my
 		System.out.println("getRequestURI : "+ request.getRequestURI());
 		
 		// 프로젝트를 구분하는 주소
+		// /_proj6_filter
 		System.out.println("getContextPath : "+ request.getContextPath());
 		
 		// 서블릿 주소만
+		// /main/my
 		System.out.println("getServletPath : "+ request.getServletPath());
 	}
 
