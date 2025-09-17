@@ -6,6 +6,24 @@
     주석
 */
 
+BEGIN
+  FOR t IN (
+    SELECT owner, table_name
+    FROM all_tables
+    WHERE owner IN ('j2p4')
+  ) LOOP
+    EXECUTE IMMEDIATE 'DROP TABLE "' || t.owner || '"."' || t.table_name || '" CASCADE CONSTRAINTS';
+  END LOOP;
+END;
+/
+
+CREATE USER scott IDENTIFIED BY tiger;
+
+GRANT CONNECT,RESOURCE,UNLIMITED TABLESPACE TO scott IDENTIFIED BY tiger;
+
+
+
+
 -- SQL : Structured Query Language
 
 select * from emp;
