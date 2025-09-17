@@ -1,2 +1,3 @@
-workspace_java/_chap00/bin/
+bin/
 *.class
+target/

@@ -47,10 +47,14 @@ public class EmpDAO {
 					+ " ) t2"
 					+ " where rnum >= ? and rnum <= ?"
 					+ " order by ename";
-			PreparedStatement ps = conn.prepareStatement(query);
+//			PreparedStatement ps = conn.prepareStatement(query);
+			PreparedStatement ps = new LoggableStatement(conn, query);
 			ps.setString(1, empDTO.getKeyword());
 			ps.setInt(2, empDTO.getStart());
 			ps.setInt(3, empDTO.getEnd());
+			
+			System.out.println(   ( (LoggableStatement)ps ).getQueryString()   );
+			
 
 			// SQL 실행
 			ResultSet rs = ps.executeQuery();
