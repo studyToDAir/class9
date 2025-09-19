@@ -6,11 +6,19 @@ public class MemberDTO {
 	private String pw;
 	private String name;
 	private int age;
+	private String tel;
 	
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
+		System.out.println("setId 실행");
 		this.id = id;
 	}
 	public String getPw() {
@@ -31,9 +39,10 @@ public class MemberDTO {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
 	@Override
 	public String toString() {
-		return "MemberDTO [id=" + id + ", pw=" + pw + ", name=" + name + ", age=" + age + "]";
+		return "MemberDTO [id=" + id + ", pw=" + pw + ", name=" + name + ", age=" + age + ", tel=" + tel + "]";
 	}
+	
+
 }
