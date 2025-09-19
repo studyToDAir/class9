@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -196,6 +199,79 @@ public class ParamController {
 	@RequestMapping("/join7")
 	public void join7(String id, MemberDTO dto) {
 		
+	}
+	
+	@RequestMapping("/cal/1")
+	public void cal() {
+		System.out.println("1월! 달력");
+	}
+	@RequestMapping("/cal/{month}")
+	public void cal2(
+			@PathVariable("month")	// 생략 불가능
+			int mon
+		) {
+		System.out.println(mon +"월 달력");
+	}
+
+	@RequestMapping("/lunch/{store}/order/{menu}/start")
+	public void lunch(
+			@PathVariable("store")
+			String store,
+			
+			@PathVariable("menu")
+			String menu
+			) {
+		System.out.println(store +"에서 "+ menu +"를 준비합니다");
+	}
+	
+	@RequestMapping("/join8")
+	public String join8() {
+		return "join";
+	}
+
+	@RequestMapping("/join9")
+	public String join9() {
+		return "redirect:join3.do";
+	}
+	
+	@RequestMapping("/join10")
+	public String join10() {
+//		joinForm3();
+		return "forward:join3.do";
+	}
+	
+	
+	@RequestMapping("/join11")
+	public String join11( Model model, String id  ) {
+
+		System.out.println("/join11 실행, id: "+ id);
+		
+		model.addAttribute("id", id);
+		
+		return "result";
+	}
+	
+	@RequestMapping(value="/join12")
+	public String join12() {
+		return "join";
+	}
+	
+	@RequestMapping(value={"/join13", "/join14"})
+	public String join13() {
+		return "join";
+	}
+	
+	@RequestMapping(value="/join15", method=RequestMethod.POST)
+	public String doPost() {
+		return "join";
+	}
+	@RequestMapping(value="/join15", method=RequestMethod.GET)
+	public String doGet() {
+		return "join";
+	}
+	@RequestMapping(value="/join16", method= { RequestMethod.GET, RequestMethod.POST })
+	public String join16() {
+		return "join";
 	}
 }
 
