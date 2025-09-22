@@ -32,6 +32,20 @@
 		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 
+	<!-- 
+		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
+		
+		String jdbc.driverClassName = "oracle.jdbc.driver.OracleDriver";
+		
+		PooledDataSource dataSource = new PooledDataSource();
+		dataSource.setDriver(jdbc.driverClassName)
+		
+		
+		sqlSessionFactory.setDataSource( dataSource );
+		sqlSessionFactory.setConfigLocation( "classpath:mybatis/model/modelConfig.xml" );
+		
+		new SqlSessionTemplate( sqlSessionFactory );
+	 -->
 </beans>
 
 
