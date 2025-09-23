@@ -73,10 +73,11 @@
 		       deptno = #{deptno}
 		WHERE  empno = #{empno}
 	</update>
-	<update id="deleteEmp2" parameterType="empDTO">
+	
+	<delete id="deleteEmp2" parameterType="empDTO">
 		DELETE emp2
 		WHERE  empno = #{empno}
-	</update>
+	</delete>
 	
 </mapper>
 
