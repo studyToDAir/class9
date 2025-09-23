@@ -12,4 +12,11 @@ public interface EmpService {
 	public Map getEmpMap();
 	public List getEmpno(int empno);
 	public List getEname(String ename);
+	public List getEmpnoEname(EmpDTO dto);
+	public int joinEmp2(EmpDTO dto);
+	
+	public EmpDTO getOneEmpno(int empno);
+	public int modifyEmp2(EmpDTO dto);
+	public int removeEmp2(EmpDTO dto);
+	
 }
