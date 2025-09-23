@@ -19,4 +19,5 @@ public interface EmpDAO {
 	public int updateEmp2(EmpDTO dto);
 	public int deleteEmp2(EmpDTO dto);
 	
+	public List<EmpDTO> selectEmp(EmpDTO empDTO);
 }

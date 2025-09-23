@@ -79,6 +79,27 @@
 		WHERE  empno = #{empno}
 	</delete>
 	
+	
+	<insert id="insertEmp3" parameterType="empDTO">
+	
+		<selectKey resultType="int" keyProperty="empno" order="BEFORE">
+			select seq_emp2.nextval from dual
+		</selectKey>
+	
+		INSERT INTO emp2 (empno, ename, job, mgr, hiredate, sal, comm, deptno)
+		VALUES (#{empno}, #{ename}, #{job}, #{mgr}, #{hiredate}, #{sal}, #{comm}, #{deptno})
+	</insert>
+	
+	
+	<insert id="insertEmp4" 
+		parameterType="empDTO" 
+		useGeneratedKeys="true" 
+		keyProperty="empno">
+		
+		INSERT INTO emp2 (empno, ename, job, mgr, hiredate, sal, comm, deptno)
+		VALUES (seq_emp2.nextval, #{ename}, #{job}, #{mgr}, #{hiredate}, #{sal}, #{comm}, #{deptno})
+	</insert>
+	
 </mapper>
 
 

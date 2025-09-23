@@ -70,4 +70,22 @@ public class EmpServiceImpl implements EmpService{
 	public int removeEmp2(EmpDTO dto) {
 		return empDAO.deleteEmp2(dto);
 	}
+
+	@Override
+	public List<EmpDTO> selectEmp(EmpDTO dto) {
+		
+		if(dto.getType().equals("1")) {
+			dto.setEname(dto.getKeyword());
+		} else if(dto.getType().equals("2")) {
+			dto.setJob(dto.getKeyword());
+		} else if(dto.getType().equals("3")) {
+			dto.setEname(dto.getKeyword());
+			dto.setJob(dto.getKeyword());
+		} else if(dto.getType().equals("4")) {
+			int sal = Integer.parseInt(dto.getKeyword());
+			dto.setSal(sal);
+		}
+		
+		return empDAO.selectEmp(dto);
+	}
 }

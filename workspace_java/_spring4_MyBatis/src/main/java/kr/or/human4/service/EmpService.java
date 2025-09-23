@@ -19,4 +19,6 @@ public interface EmpService {
 	public int modifyEmp2(EmpDTO dto);
 	public int removeEmp2(EmpDTO dto);
 	
+	public List<EmpDTO> selectEmp(EmpDTO dto);
+	
 }

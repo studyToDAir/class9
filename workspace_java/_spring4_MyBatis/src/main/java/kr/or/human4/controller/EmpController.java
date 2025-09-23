@@ -125,4 +125,14 @@ public class EmpController {
 		
 		return "redirect:/listEmp";
 	}
+	
+	@RequestMapping("/search")
+	public String search(Model model, EmpDTO dto) {
+		
+		List<EmpDTO> list = empService.selectEmp(dto);
+
+		model.addAttribute("list", list);
+		
+		return "emp";
+	}
 }
