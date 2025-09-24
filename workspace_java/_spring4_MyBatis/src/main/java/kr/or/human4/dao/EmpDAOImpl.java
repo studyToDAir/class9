@@ -123,7 +123,10 @@ public class EmpDAOImpl implements EmpDAO {
 		
 		return resultList;
 	}
-	
-	
+
+	@Override
+	public List<EmpDTO> foreach(EmpDTO empDTO) {
+		return sqlSession.selectList("mapper.emp.dynamic.foreach", empDTO);
+	}
 	
 }

@@ -1344,6 +1344,12 @@ commit;
 
 select count(*) from emp2;
 
+select * from emp2
+where empno in (7500, 7567, 7699);
+
+
+
+
 
 
 
