@@ -166,7 +166,7 @@
       
       
       
-      <Context docBase="_spring4_MyBatis" path="/human4" reloadable="true" source="org.eclipse.jst.jee.server:_spring4_MyBatis"/></Host>
+      <Context docBase="_spring6_tiles" path="/human6" reloadable="true" source="org.eclipse.jst.jee.server:_spring6_tiles"/></Host>
     </Engine>
   </Service>
 </Server>

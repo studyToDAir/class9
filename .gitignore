@@ -1,3 +1,8 @@
 bin/
 *.class
 target/
+.vs/
+obj/
+Properties/
+packages/
+node_modules/
