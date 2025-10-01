@@ -4,6 +4,15 @@ const appRoot = require('app-root-path').path
 const session = require('express-session')
 const bodyParser = require('body-parser')
 
+// const db = require('./db/oracle.js')
+// const db = require('./db/oracle')
+
+// const db = require('./db/index.js')
+// const db = require('./db/index')
+// const db = require('./db')
+
+const db = require('./oracle')
+
 const port = 3000
 app.listen(port, function(){
     console.log('서버 켜짐', port, appRoot)
@@ -76,6 +85,12 @@ app.post('/ajax', function(req, resp){
     console.log(req.body.name, req.body.addr)
 
     resp.send(req.body)
+})
+
+app.get('/deptno', async function(req, resp){
+    const deptno = req.query.deptno
+    const result = await db.getDeptno(deptno)
+    resp.send(result.rows)
 })
 
 function aop(req, resp, next){

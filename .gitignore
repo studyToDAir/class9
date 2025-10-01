@@ -6,3 +6,4 @@ obj/
 Properties/
 packages/
 node_modules/
+__pycache__/
