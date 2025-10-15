@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <video id="v" autoplay playsinline></video> <!--playsinline : ios에서 전체화면 말고-->
+                                                <!--html 안에서 재생되는 속성-->
+    <br>
+    <button type="button" id="show">open cam</button>
+
+<script>
+
+    document.querySelector('#show').addEventListener('click', async function(){
+
+        const option = {
+            audio: true,
+            video: true
+        }
+        const stream = await navigator.mediaDevices.getUserMedia(option)
+
+        // 장치명 표시
+        const track = stream.getVideoTracks()
+        console.log(`비디오 장치명 : ${track[0].label}`)
+
+        const video = document.querySelector('#v')
+        video.srcObject = stream
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!--Include the JS & CSS-->
+<link rel="stylesheet" href="https://richtexteditor.com/richtexteditor/rte_theme_default.css" />
+<script type="text/javascript" src="./rte.js"></script>
+<script type="text/javascript" src='https://richtexteditor.com/richtexteditor/plugins/all_plugins.js'></script>
+
+
+<div id="editor" style="width: 100%"></div>
+
+<button type="button" id="send">확인</button>
+
+
+<script>
+    // https://richtexteditor.com/
+    let _editor = null;
+    window.addEventListener("load", function(){
+        // let editorCfg = {
+        //     enterKeyTag : "br"
+        // }
+        // _editor = new RichTextEditor("#editor", editorCfg);
+        _editor = new RichTextEditor("#editor");
+
+        document.querySelector("#send").addEventListener("click", function(){
+            // 적은 글씨를 html 코드로 추출
+            let text = _editor.getHTMLCode();
+            // 기존 textarea처럼 글씨만 추출
+            // let text = _editor.getPlainText();
+            console.log(text);
+        })
+    })
+</script>
