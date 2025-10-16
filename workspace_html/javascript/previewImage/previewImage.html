@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <img id="preview">
+    <br>
+    <!-- accept="image/*" 파일 중 기본적으로 이미지만 필터링  -->
+    <input type="file" id="img" accept="image/*">
+
+<script>
+    // 업로드할 파일이 바뀌면
+    document.querySelector('#img').addEventListener('change', function(event){
+        // 이미지 처리 객체
+        const reader = new FileReader()
+
+        // 업로드할 이미지를 읽어오기
+        const file = event.target.files[0]
+        reader.readAsDataURL( file )
+
+        // 다 읽어 오면 처리
+        reader.onload = function(e){
+            // img 태그에 읽어온 이미지 넣기
+            document.querySelector('#preview').setAttribute('src', e.target.result)
+        }
+
+    })
+</script>
+
+</body>
+</html>
